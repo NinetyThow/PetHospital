@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+      <property name="url" value="jdbc:mysql://192.168.0.105:3306/mt"></property>
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+      <property name="username" value="root"></property>
+      <property name="password" value="root"></property>
+   </bean>
+   
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource"></property>
+      <property name="typeAliasesPackage" value="com.sy.pojo"></property>
+   </bean>
+   
+   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+   p:dataSource-ref="dataSource" />
+   
+   <tx:annotation-driven/>
+   
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+   p:basePackage="com.sy.mapper" />
+   
+   <context:component-scan base-package="com.sy"></context:component-scan>
+
+</beans>
