@@ -11,6 +11,7 @@ public class Visits {
         return visitId;
     }
 
+
     public void setVisitId(int visitId) {
         this.visitId = visitId;
     }
