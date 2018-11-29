@@ -10,15 +10,15 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-      <property name="url" value="jdbc:mysql://192.168.0.105:3306/mt"></property>
-      <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-      <property name="username" value="root"></property>
-      <property name="password" value="root"></property>
+      <property name="url" value="jdbc:mysql://192.168.0.105:3306/mt"/>
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="username" value="root"/>
+      <property name="password" value="root"/>
    </bean>
    
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-      <property name="dataSource" ref="dataSource"></property>
-      <property name="typeAliasesPackage" value="com.sy.pojo"></property>
+      <property name="dataSource" ref="dataSource"/>
+      <property name="typeAliasesPackage" value="com.sy.pojo"/>
    </bean>
    
    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
@@ -29,6 +29,6 @@
    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
    p:basePackage="com.sy.mapper" />
    
-   <context:component-scan base-package="com.sy"></context:component-scan>
+   <context:component-scan base-package="com.sy"/>
 
 </beans>
