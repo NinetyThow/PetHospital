@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mapper.PetHospitalMapper">
+
+    <select id="findPets" resultMap="petInfo">
+        select *
+        from pets
+                 inner join owners o on pets.ownerId = o.ownerId
+                 inner join types t on pets.typeId = t.typeId
+    </select>
+
+    <select id="findPetsByName" parameterType="Pets" resultMap="petInfo">
+        select *
+        from pets
+                 inner join owners o on pets.ownerId = o.ownerId
+                 inner join types t on pets.typeId = t.typeId
+        where petName = #{petName}
+    </select>
+
+    <select id="findPetsByType" parameterType="Pets" resultMap="petInfo">
+        select *
+        from pets
+                 inner join owners o on pets.ownerId = o.ownerId
+                 inner join types t on pets.typeId = t.typeId
+        where typeId = #{typeId}
+    </select>
+
+    <resultMap type="com.sy.pojo.Pets" id="petInfo" autoMapping="true">
+        <id property="petId" column="petId"/>
+        <association property="owners" javaType="com.sy.pojo.Owners" autoMapping="true">
+            <id property="ownerId" column="ownerId"/>
+        </association>
+        <association property="types" javaType="com.sy.pojo.Types" autoMapping="true">
+            <id property="typeId" column="typeId"/>
+        </association>
+    </resultMap>
+
+    <update id="updatePets" parameterType="Pets">
+        update pets
+        set petName     = #{petName},
+            petBirthday = #{petBirthday},
+            typeId      = #{typeId},
+            ownerId     = #{ownerId}
+        where petName = #{petName}
+    </update>
+
+    <insert id="insertPets" parameterType="Pets">
+        insert into pets (petName, petBirthday, typeId, ownerId)
+        values (#{petName}, #{petBirthday}, #{typeId}, #{ownerId})
+    </insert>
+
+    <select id="findVisitsByName" parameterType="int" resultType="Visits">
+        select *
+        from visits
+        where petId = #{petId}
+    </select>
+
+    <insert id="insertVisits" parameterType="Visits">
+        insert into visits (petId, visitDate, description)
+        values (#{petId}, #{visitDate}, #{description})
+    </insert>
+
+    <select id="findTypeById" parameterType="int" resultType="Types">
+        select *
+        from types
+        where typeId = #{typeId}
+    </select>
+
+    <select id="findOwnerById" parameterType="int" resultType="Owners">
+        select *
+        from owners
+        where ownerId = #{ownerId}
+    </select>
+
+</mapper>

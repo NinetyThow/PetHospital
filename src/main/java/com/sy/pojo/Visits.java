@@ -2,6 +2,7 @@ package com.sy.pojo;
 
 public class Visits {
     private int visitId;
+    private Integer petId;
     private Pets pets;
     private String visitDate;
     private String description;
@@ -12,6 +13,14 @@ public class Visits {
 
     public void setVisitId(int visitId) {
         this.visitId = visitId;
+    }
+
+    public Integer getPetId() {
+        return petId;
+    }
+
+    public void setPetId(Integer petId) {
+        this.petId = petId;
     }
 
     public Pets getPets() {
