@@ -13,7 +13,6 @@ public class Pets {
     private Owners owners;
     private List<Visits> list = new ArrayList<>();
 
-
     public int getPetId() {
         return petId;
     }

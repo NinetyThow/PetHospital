@@ -17,14 +17,7 @@ public class PetHospitalController {
 
     //新增宠物信息
     @RequestMapping("/insert")
-    public String insert(String petName, String petBirthday, int typeId, int ownerId) {
-        Pets pets = new Pets();
-        Types types = petHospitalBizImpl.searchTypeById(typeId);
-        Owners owners = petHospitalBizImpl.searchOwnerById(ownerId);
-        pets.setOwners(owners);
-        pets.setTypes(types);
-        pets.setPetName(petName);
-        pets.setPetBirthday(petBirthday);
+    public String insert(Pets pets) {
         petHospitalBizImpl.addPets(pets);
         return "test";
     }

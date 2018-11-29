@@ -10,7 +10,6 @@ public class VetSpecialty {
         return vetId;
     }
 
-
     public void setVetId(Integer vetId) {
         this.vetId = vetId;
     }

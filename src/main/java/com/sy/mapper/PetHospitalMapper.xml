@@ -42,14 +42,14 @@
         update pets
         set petName     = #{petName},
             petBirthday = #{petBirthday},
-            typeId      = #{types.typeId},
-            ownerId     = #{owners.ownerId}
+            typeId      = #{typeId},
+            ownerId     = #{ownerId}
         where petName = #{petName}
     </update>
 
     <insert id="insertPets" parameterType="Pets">
         insert into pets (petName, petBirthday, typeId, ownerId)
-        values (#{petName}, #{petBirthday}, #{types.typeId}, #{owners.ownerId})
+        values (#{petName}, #{petBirthday}, #{typeId}, #{ownerId})
     </insert>
 
     <select id="findVisitsByName" parameterType="int" resultType="Visits">
@@ -64,11 +64,15 @@
     </insert>
 
     <select id="findTypeById" parameterType="int" resultType="Types">
-        select * from types where typeId=#{typeId}
+        select *
+        from types
+        where typeId = #{typeId}
     </select>
 
     <select id="findOwnerById" parameterType="int" resultType="Owners">
-        select * from owners where ownerId=#{ownerId}
+        select *
+        from owners
+        where ownerId = #{ownerId}
     </select>
 
 </mapper>
