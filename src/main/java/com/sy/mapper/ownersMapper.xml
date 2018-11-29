@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.sy.mapper.ownersMapper">
+    <!--浏览宠物主人的信息-->
+    <!--private int ownerId;-->
+    <!--private String ownerName;-->
+    <!--private String ownerAddress;-->
+    <!--private String ownerCity;-->
+    <!--private String ownerTelephone;-->
+    <select id="CheckAllOwnersMsg" resultType="Owners">
+          select * from owners
+    </select>
+
+    <select id="CheckOwnersMsgByPetsId" parameterType="int" resultType="ownersResultMap">
+        select * from owners o join pets p on o.ownerId = p.ownerId   where petId=#{petId}
+    </select>
+
+    <resultMap type="Owners" id="ownersResultMap" autoMapping="true">
+        <id property="ownerId" column="ownerId"></id>
+        <collection property="pets" ofType="Pets" autoMapping="true">
+            <id property="petId" column="petId"></id>
+        </collection>
+    </resultMap>
+
+    <insert id="CreateOwners" parameterType="Owners">
+      insert into owners
+        values (default ,#{ownerName},#{ownerAddress},#{ownerCity},#{ownerTelephone})
+    </insert>
+
+    <!--更新宠物主人的信息-->
+    <!--添加新客户-->
+
+
+
+
+</mapper>
