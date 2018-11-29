@@ -20,9 +20,9 @@
     </select>
 
     <resultMap type="Owners" id="ownersResultMap" autoMapping="true">
-        <id property="ownerId" column="ownerId"></id>
+        <id property="ownerId" column="ownerId"/>
         <collection property="pets" ofType="Pets" autoMapping="true">
-            <id property="petId" column="petId"></id>
+            <id property="petId" column="petId"/>
         </collection>
     </resultMap>
 
