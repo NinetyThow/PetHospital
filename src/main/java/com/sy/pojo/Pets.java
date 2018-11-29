@@ -7,6 +7,8 @@ public class Pets {
     private int petId;
     private String petName;
     private String petBirthday;
+    private Integer typeId;
+    private Integer ownerId;
     private Types types;
     private Owners owners;
     private List<Visits> list = new ArrayList<>();
@@ -33,6 +35,22 @@ public class Pets {
 
     public void setPetBirthday(String petBirthday) {
         this.petBirthday = petBirthday;
+    }
+
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
     public Types getTypes() {
