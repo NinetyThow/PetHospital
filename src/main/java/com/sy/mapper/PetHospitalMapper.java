@@ -6,13 +6,19 @@ import com.sy.pojo.Types;
 import com.sy.pojo.Visits;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PetHospitalMapper {
     //查询所有宠物的信息
-    List<Pets> findPets();
+    List<Pets> findPets(Map<String, Object> map);
 
     //根据姓名查询宠物的信息
     List<Pets> findPetsByName(Pets pets);
+
+    int findAllCount();
+
+    //根据Id查询宠物的信息
+    Pets findPetsById(Pets pets);
 
     //根据宠物的种类查询宠物的信息
     List<Pets> findPetsByType(Pets pets);
@@ -35,4 +41,9 @@ public interface PetHospitalMapper {
     //根据主人Id查询主人信息
     Owners findOwnerById(int ownerId);
 
+    //查询宠物的类别
+    List<Types> findTypes();
+
+    //查询宠物的主人
+    List<Owners> findOwners();
 }

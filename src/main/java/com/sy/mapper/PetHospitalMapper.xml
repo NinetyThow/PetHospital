@@ -5,11 +5,24 @@
 
 <mapper namespace="com.sy.mapper.PetHospitalMapper">
 
-    <select id="findPets" resultMap="petInfo">
+    <select id="findPets" parameterType="Map" resultMap="petInfo">
         select *
         from pets
                  inner join owners o on pets.ownerId = o.ownerId
                  inner join types t on pets.typeId = t.typeId
+        limit ${(pageCode-1)*pageSize},${pageSize}
+    </select>
+
+    <select id="findAllCount" resultType="int">
+        select count(*) from pets
+    </select>
+
+    <select id="findPetsById" resultMap="petInfo">
+        select *
+        from pets
+                 inner join owners o on pets.ownerId = o.ownerId
+                 inner join types t on pets.typeId = t.typeId
+        where petId = #{petId}
     </select>
 
     <select id="findPetsByName" parameterType="Pets" resultMap="petInfo">
@@ -17,7 +30,7 @@
         from pets
                  inner join owners o on pets.ownerId = o.ownerId
                  inner join types t on pets.typeId = t.typeId
-        where petName = #{petName}
+        where petName like '%${petName}%'
     </select>
 
     <select id="findPetsByType" parameterType="Pets" resultMap="petInfo">
@@ -75,4 +88,13 @@
         where ownerId = #{ownerId}
     </select>
 
+    <select id="findTypes" resultType="Types">
+        select t.typeId, t.typeName
+        from types t
+    </select>
+
+    <select id="findOwners" resultType="Owners">
+        select o.ownerId, o.ownerName
+        from owners o
+    </select>
 </mapper>

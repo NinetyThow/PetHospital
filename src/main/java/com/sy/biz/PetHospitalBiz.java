@@ -1,15 +1,16 @@
 package com.sy.biz;
 
-import com.sy.pojo.Owners;
-import com.sy.pojo.Pets;
-import com.sy.pojo.Types;
-import com.sy.pojo.Visits;
+import com.sy.pojo.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PetHospitalBiz {
     //查询所有宠物的信息
-    List<Pets> searchPets();
+    PageBean searchPets(int pageSize, int pageCode);
+
+    //根据Id查询宠物的信息
+    Pets searchPetsById(Pets pets);
 
     //根据姓名查询宠物的信息
     List<Pets> searchPetsByName(Pets pets);
@@ -34,4 +35,10 @@ public interface PetHospitalBiz {
 
     //根据主人Id查询主人信息
     Owners searchOwnerById(int ownerId);
+
+    //查询宠物的种类
+    List<Types> searchTypes();
+
+    //查询宠物的主人
+    List<Owners> searchOwners();
 }
