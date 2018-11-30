@@ -7,4 +7,16 @@
     <select id="check" parameterType="Employees" resultType="Employees">
          select * from employees where employeeName = #{employeeName} and employeePassword = #{employeePassword}
     </select>
+    <select id="findVetsByPage" parameterType="Map" resultType="Vets">
+        select * from vets limit ${(pageCode-1)*pageSize},${pageSize}
+    </select>
+    <select id="findAllVets" resultType="int">
+        select count(*) from vets
+    </select>
+    <insert id="createVets" parameterType="Vets">
+        insert into vets(vetName) values (#{vetName})
+    </insert>
+    <insert id="createVetSpecialty" parameterType="Vets">
+        insert into vet_specialty(vetId, specialtyId) values (#{vetId},#{specialtyId})
+    </insert>
 </mapper>
