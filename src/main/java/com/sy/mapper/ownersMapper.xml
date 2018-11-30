@@ -11,29 +11,44 @@
     <!--private String ownerAddress;-->
     <!--private String ownerCity;-->
     <!--private String ownerTelephone;-->
-    <select id="CheckAllOwnersMsg" resultType="Owners">
-          select * from owners
+    <select id="CheckAllOwnersMsg" parameterType="Map" resultType="Owners">
+          select * from owners limit ${(pageCode-1)*pageSize},${pageSize}
     </select>
 
-    <select id="CheckOwnersMsgByPetsId" parameterType="int" resultType="ownersResultMap">
+    <select id="findAllCount" resultType="int">
+        select COUNT(*) from owners
+    </select>
+
+    <select id="findOwnersById" parameterType="int" resultType="Owners">
+        select * from owners where ownerId = #{ownerId}
+    </select>
+
+    <select id="CheckOwnersMsgByPetsId" parameterType="int" resultMap="ownersResultMap">
         select * from owners o join pets p on o.ownerId = p.ownerId   where petId=#{petId}
     </select>
 
-    <resultMap type="Owners" id="ownersResultMap" autoMapping="true">
+    <resultMap type="com.sy.pojo.Owners" id="ownersResultMap" autoMapping="true">
         <id property="ownerId" column="ownerId"/>
-        <collection property="pets" ofType="Pets" autoMapping="true">
+        <collection property="petsList" ofType="Pets" autoMapping="true">
             <id property="petId" column="petId"/>
         </collection>
     </resultMap>
 
-    <insert id="CreateOwners" parameterType="Owners">
-      insert into owners
-        values (default ,#{ownerName},#{ownerAddress},#{ownerCity},#{ownerTelephone})
-    </insert>
+
 
     <!--更新宠物主人的信息-->
+
+    <update id="UpdateOwners" parameterType="Owners">
+       update owners set ownerName = #{ownerName},ownerAddress = #{ownerAddress},ownerCity = #{ownerCity},ownerTelephone = #{ownerTelephone}
+        where ownerId = #{ownerId}
+    </update>
+
     <!--添加新客户-->
 
+    <insert id="CreateOwner" parameterType="Owners">
+        insert  into owners
+        values (default ,#{ownerName},#{ownerAddress},#{ownerCity},#{ownerTelephone})
+    </insert>
 
 
 

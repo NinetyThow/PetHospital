@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -23,8 +24,8 @@
     <li class="layui-nav-item">
         <a href="javascript:;">信息管理</a>
         <dl class="layui-nav-child">
-            <dd><a href="">添加客户</a></dd>
-            <dd><a href="">修改客户</a></dd>
+            <dd><a href="<c:url value="/jsp/Owners.jsp"/>">添加客户</a></dd>
+            <dd><a href="/AllOwners">修改客户</a></dd>
             <dd><a href="">添加宠物</a></dd>
             <dd><a href="">修改宠物</a></dd>
             <dd><a href="">就医记录</a></dd>
