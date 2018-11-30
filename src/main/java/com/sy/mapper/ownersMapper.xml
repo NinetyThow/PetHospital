@@ -15,7 +15,7 @@
           select * from owners
     </select>
 
-    <select id="CheckOwnersMsgByPetsId" parameterType="int" resultType="ownersResultMap">
+    <select id="CheckOwnersMsgByPetsId" parameterType="int" resultMap="ownersResultMap">
         select * from owners o join pets p on o.ownerId = p.ownerId   where petId=#{petId}
     </select>
 
