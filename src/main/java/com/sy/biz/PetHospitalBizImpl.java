@@ -17,7 +17,7 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
     @Autowired
     PetHospitalMapper petHospitalMapper;
 
-    @Override
+    /*@Override
     public PageBean searchPets(int pageSize, int pageCode) {
         PageBean pb=new PageBean();
         int allCount= petHospitalMapper.findAllCount();
@@ -33,7 +33,7 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
         List<Pets> list = petHospitalMapper.findPets(map);
         pb.setDatas(list);
         return pb;
-    }
+    }*/
 
     @Override
     public Pets searchPetsById(Pets pets) {
@@ -41,33 +41,64 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
     }
 
     @Override
-    public List<Pets> searchPetsByName(Pets pets) {
-        return petHospitalMapper.findPetsByName(pets);
+    public PageBean searchPagePetsLikeName(int pageSize, int pageCode, String petName) {
+        PageBean pb = new PageBean();
+        Map<String, Object> map = new HashMap<>();
+        map.put("pageSize", pageSize);
+        map.put("pageCode", pageCode);
+        map.put("petName", petName);
+        int allCount = petHospitalMapper.findAllCount(map);
+        pb.setAllCount(allCount);
+        pb.setPageSize(pageSize);
+        if (pageCode > pb.getAllPages()) {
+            pageCode = pb.getAllPages();
+        }
+        pb.setPageCode(pageCode);
+        List<Pets> list = petHospitalMapper.findPetsLikeName(map);
+        pb.setDatas(list);
+        return pb;
     }
 
-    @Override
+    /*@Override
     public List<Pets> searchPetsByType(Pets pets) {
         return petHospitalMapper.findPetsByType(pets);
-    }
+    }*/
 
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     @Override
     public void replacePets(Pets pets) {
         petHospitalMapper.updatePets(pets);
     }
 
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     @Override
     public void addPets(Pets pets) {
         petHospitalMapper.insertPets(pets);
     }
 
     @Override
-    public List<Visits> searchVisitsByName(int petsId) {
-        return petHospitalMapper.findVisitsByName(petsId);
+    public PageBean searchVisitsLikeName(int pageSize, int pageCode, String petName) {
+        PageBean pb = new PageBean();
+        Map<String, Object> map = new HashMap<>();
+        map.put("pageSize", pageSize);
+        map.put("pageCode", pageCode);
+        map.put("petName",petName);
+        System.out.println("000000000000");
+        int allCount = petHospitalMapper.findAllVisitCount(map);
+        System.out.println("1111");
+        pb.setAllCount(allCount);
+        pb.setPageSize(pageSize);
+        if (pageCode > pb.getAllPages()) {
+            pageCode = pb.getAllPages();
+        }
+        pb.setPageCode(pageCode);
+        List<Visits> list = petHospitalMapper.findVisitsLikeName(map);
+        System.out.println("22222");
+        pb.setDatas(list);
+        return pb;
     }
 
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     @Override
     public void addVisits(Visits visits) {
         petHospitalMapper.insertVisits(visits);
@@ -91,6 +122,16 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
     @Override
     public List<Owners> searchOwners() {
         return petHospitalMapper.findOwners();
+    }
+
+    @Override
+    public List<Pets> searchPets() {
+        return petHospitalMapper.findPets();
+    }
+
+    @Override
+    public List<Vets> searchVets() {
+        return petHospitalMapper.findVets();
     }
 
 }

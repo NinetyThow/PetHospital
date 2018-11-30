@@ -1,16 +1,15 @@
 package com.sy.controller;
 
 import com.sy.biz.PetHospitalBiz;
-import com.sy.pojo.Owners;
-import com.sy.pojo.PageBean;
-import com.sy.pojo.Pets;
-import com.sy.pojo.Types;
+import com.sy.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,27 +17,9 @@ public class PetHospitalController {
     @Autowired
     private PetHospitalBiz petHospitalBizImpl;
 
-    //新增宠物信息
-    @RequestMapping("/insert")
+    @RequestMapping("/insertPet")
     public String insert(Pets pets) {
         petHospitalBizImpl.addPets(pets);
-        return "insertPets";
-    }
-
-    //查询宠物信息
-    @RequestMapping("/query")
-    public String query(Pets pets) {
-        List<Pets> list = petHospitalBizImpl.searchPetsByName(pets);
-        for (Pets pet : list) {
-            System.out.println(pet.getTypes().getTypeId());
-        }
-        return "test";
-    }
-
-    //更新宠物信息
-    @RequestMapping("/update")
-    public String update(Pets pets) {
-        petHospitalBizImpl.replacePets(pets);
         return "updatePets1";
     }
 
@@ -51,17 +32,17 @@ public class PetHospitalController {
         return "insertPets";
     }
 
-    @RequestMapping("/updatePetJsp1")
-    public String updatePetJsp1(@RequestParam(value="pageCode",defaultValue="1") int pageCode, ModelMap modelMap) {
-        PageBean pb = petHospitalBizImpl.searchPets(2, pageCode);
-        modelMap.put("petsList",pb);
+    @RequestMapping("/updatePet")
+    public String update(Pets pets) {
+        petHospitalBizImpl.replacePets(pets);
         return "updatePets1";
     }
 
-    @RequestMapping("/updatePetJsp11")
-    public String updatePetJsp11(Pets pets,ModelMap modelMap) {
-        List<Pets> petsList= petHospitalBizImpl.searchPetsByName(pets);
-        modelMap.put("petsList",petsList);
+    @RequestMapping("/updatePetJsp")
+    public String updatePetJsp1(@RequestParam(value="pageCode",defaultValue="1") int pageCode, Pets pets,ModelMap modelMap) {
+        String petName = pets.getPetName();
+        PageBean pb = petHospitalBizImpl.searchPagePetsLikeName(2,pageCode,petName);
+        modelMap.put("petsList",pb);
         return "updatePets1";
     }
 
@@ -74,6 +55,29 @@ public class PetHospitalController {
         modelMap.put("ownersList",ownersList);
         modelMap.put("pet",pet);
         return "updatePets2";
+    }
+
+    @RequestMapping("/insertVisit")
+    public String insertVisit(Visits visits){
+        petHospitalBizImpl.addVisits(visits);
+        return "insertVisits";
+    }
+
+    @RequestMapping("/insertVisitJsp")
+    public String insertVisitJsp(ModelMap modelMap) {
+        List<Pets> petsList = petHospitalBizImpl.searchPets();
+        List<Vets> vetsList = petHospitalBizImpl.searchVets();
+        modelMap.put("petsList",petsList);
+        modelMap.put("vetsList",vetsList);
+        return "insertVisits";
+    }
+
+    @RequestMapping("/findVisitsJsp")
+    public String updatePetJsp1(@RequestParam(value="pageCode",defaultValue="1") int pageCode, String petName,ModelMap modelMap) {
+        PageBean pb = petHospitalBizImpl.searchVisitsLikeName(2, pageCode, petName);
+        modelMap.put("q",petName);
+        modelMap.put("visitList",pb);
+        return "findVisits";
     }
 
 }

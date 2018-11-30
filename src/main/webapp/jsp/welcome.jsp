@@ -26,9 +26,10 @@
         <dl class="layui-nav-child">
             <dd><a href="<c:url value="/jsp/Owners.jsp"/>">添加客户</a></dd>
             <dd><a href="/AllOwners">修改客户</a></dd>
-            <dd><a href="">添加宠物</a></dd>
-            <dd><a href="">修改宠物</a></dd>
-            <dd><a href="">就医记录</a></dd>
+            <dd><a href="/insertPetJsp">添加宠物</a></dd>
+            <dd><a href="/updatePetJsp?petName=">修改宠物</a></dd>
+            <dd><a href="/findVisitsJsp">查看就医记录</a></dd>
+            <dd><a href="/insertVisitJsp">新增就医记录</a></dd>
         </dl>
     </li>
 

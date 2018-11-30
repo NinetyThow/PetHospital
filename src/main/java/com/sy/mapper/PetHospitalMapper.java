@@ -1,27 +1,19 @@
 package com.sy.mapper;
 
-import com.sy.pojo.Owners;
-import com.sy.pojo.Pets;
-import com.sy.pojo.Types;
-import com.sy.pojo.Visits;
+import com.sy.pojo.*;
 
 import java.util.List;
 import java.util.Map;
 
 public interface PetHospitalMapper {
-    //查询所有宠物的信息
-    List<Pets> findPets(Map<String, Object> map);
-
-    //根据姓名查询宠物的信息
-    List<Pets> findPetsByName(Pets pets);
-
-    int findAllCount();
 
     //根据Id查询宠物的信息
     Pets findPetsById(Pets pets);
 
-    //根据宠物的种类查询宠物的信息
-    List<Pets> findPetsByType(Pets pets);
+    int findAllCount(Map<String, Object> map);
+
+    //根据姓名查询宠物的信息
+    List<Pets> findPetsLikeName(Map<String, Object> map);
 
     //更新宠物信息
     void updatePets(Pets pets);
@@ -29,8 +21,10 @@ public interface PetHospitalMapper {
     //添加宠物信息
     void insertPets(Pets pets);
 
+    int findAllVisitCount(Map<String, Object> map);
+
     //根据姓名查询宠物就医记录
-    List<Visits> findVisitsByName(int petsId);
+    List<Visits> findVisitsLikeName(Map<String, Object> map);
 
     //新增宠物就医记录
     void insertVisits(Visits visits);
@@ -46,4 +40,10 @@ public interface PetHospitalMapper {
 
     //查询宠物的主人
     List<Owners> findOwners();
+
+    //查询宠物的基础信息
+    List<Pets> findPets();
+
+    //查询兽医的信息
+    List<Vets> findVets();
 }

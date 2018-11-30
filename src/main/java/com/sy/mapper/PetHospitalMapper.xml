@@ -5,18 +5,7 @@
 
 <mapper namespace="com.sy.mapper.PetHospitalMapper">
 
-    <select id="findPets" parameterType="Map" resultMap="petInfo">
-        select *
-        from pets
-                 inner join owners o on pets.ownerId = o.ownerId
-                 inner join types t on pets.typeId = t.typeId
-        limit ${(pageCode-1)*pageSize},${pageSize}
-    </select>
-
-    <select id="findAllCount" resultType="int">
-        select count(*) from pets
-    </select>
-
+    <!--根据宠物的Id获取到单个宠物的信息-->
     <select id="findPetsById" resultMap="petInfo">
         select *
         from pets
@@ -25,20 +14,23 @@
         where petId = #{petId}
     </select>
 
-    <select id="findPetsByName" parameterType="Pets" resultMap="petInfo">
-        select *
+    <!--条件查询出符合条件的所有信息数-->
+    <select id="findAllCount" parameterType="Map" resultType="int">
+        select count(*)
         from pets
                  inner join owners o on pets.ownerId = o.ownerId
                  inner join types t on pets.typeId = t.typeId
         where petName like '%${petName}%'
     </select>
 
-    <select id="findPetsByType" parameterType="Pets" resultMap="petInfo">
+    <!--分页条件查询出符合条件的信息-->
+    <select id="findPetsLikeName" parameterType="Map" resultMap="petInfo">
         select *
         from pets
                  inner join owners o on pets.ownerId = o.ownerId
                  inner join types t on pets.typeId = t.typeId
-        where typeId = #{typeId}
+        where petName like '%${petName}%'
+        limit ${(pageCode-1)*pageSize},${pageSize}
     </select>
 
     <resultMap type="com.sy.pojo.Pets" id="petInfo" autoMapping="true">
@@ -51,29 +43,57 @@
         </association>
     </resultMap>
 
+    <!--根据宠物的Id修改宠物的信息-->
     <update id="updatePets" parameterType="Pets">
         update pets
         set petName     = #{petName},
             petBirthday = #{petBirthday},
             typeId      = #{typeId},
             ownerId     = #{ownerId}
-        where petName = #{petName}
+        where petId = #{petId}
     </update>
 
+    <!--插入宠物的信息-->
     <insert id="insertPets" parameterType="Pets">
         insert into pets (petName, petBirthday, typeId, ownerId)
         values (#{petName}, #{petBirthday}, #{typeId}, #{ownerId})
     </insert>
 
-    <select id="findVisitsByName" parameterType="int" resultType="Visits">
+    <!--分页条件查询出符合条件的就医信息-->
+    <select id="findVisitsLikeName" parameterType="Map" resultMap="VisitsInfo">
         select *
         from visits
-        where petId = #{petId}
+                 inner join pets p on visits.petId = p.petId
+                 inner join vets v on visits.vetId = v.vetId
+        where p.petName like '%${petName}%'
+           or v.vetName like '%${petName}%'
+        limit ${(pageCode-1)*pageSize},${pageSize}
     </select>
 
+    <!--条件查询出符合条件的所有信息数-->
+    <select id="findAllVisitCount" parameterType="Map" resultType="int">
+        select count(*)
+        from visits
+                 inner join pets p on visits.petId = p.petId
+                 inner join vets v on visits.vetId = v.vetId
+        where p.petName like '%${petName}%'
+           or v.vetName like '%${petName}%'
+    </select>
+
+    <resultMap type="com.sy.pojo.Visits" id="VisitsInfo" autoMapping="true">
+        <id property="visitId" column="visitId"/>
+        <association property="pets" javaType="com.sy.pojo.Pets" autoMapping="true">
+            <id property="petId" column="petId"/>
+        </association>
+        <association property="vets" javaType="com.sy.pojo.Vets" autoMapping="true">
+            <id property="vetId" column="vetId"/>
+        </association>
+    </resultMap>
+
+    <!--插入就医信息-->
     <insert id="insertVisits" parameterType="Visits">
-        insert into visits (petId, visitDate, description)
-        values (#{petId}, #{visitDate}, #{description})
+        insert into visits (petId, vetId, visitDate, description)
+        values (#{petId}, #{vetId}, #{visitDate}, #{description})
     </insert>
 
     <select id="findTypeById" parameterType="int" resultType="Types">
@@ -88,13 +108,27 @@
         where ownerId = #{ownerId}
     </select>
 
+    <!--获取到所有的类型信息-->
     <select id="findTypes" resultType="Types">
         select t.typeId, t.typeName
         from types t
     </select>
 
+    <!--获取到所有的主人信息-->
     <select id="findOwners" resultType="Owners">
         select o.ownerId, o.ownerName
         from owners o
+    </select>
+
+    <!--获取到所有宠物信息-->
+    <select id="findPets" resultType="Pets">
+        select p.petId, p.petName
+        from pets p;
+    </select>
+
+    <!--获取到所有兽医信息-->
+    <select id="findVets" resultType="Vets">
+        select v.vetId, v.vetName
+        from vets v;
     </select>
 </mapper>

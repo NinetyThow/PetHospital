@@ -4,6 +4,8 @@ public class Visits {
     private int visitId;
     private Integer petId;
     private Pets pets;
+    private Integer vetId;
+    private Vets vets;
     private String visitDate;
     private String description;
 
@@ -29,6 +31,22 @@ public class Visits {
 
     public void setPets(Pets pets) {
         this.pets = pets;
+    }
+
+    public Integer getVetId() {
+        return vetId;
+    }
+
+    public void setVetId(Integer vetId) {
+        this.vetId = vetId;
+    }
+
+    public Vets getVets() {
+        return vets;
+    }
+
+    public void setVets(Vets vets) {
+        this.vets = vets;
     }
 
     public String getVisitDate() {
