@@ -7,19 +7,26 @@
 </head>
 <body>
 
-<div id="test1"></div>
+<form action="/OwnerBypetsId" id="form1">
+    <input type="text" name="petsId">
+    <button type="submit" >提交</button>
+</form>
 
-<script src="../layui/layui.js"></script>
+
 <script>
-    layui.use('laypage', function(){
-        var laypage = layui.laypage;
 
-        //执行一个laypage实例
-        laypage.render({
-            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
-            ,count: 20 //数据总数，从服务端得到
+    function request_json(){
+        $.ajax({
+            type:"post",
+            url:"OwnerBypetsId",
+            contentType:"application/json;charset=utf-8",
+            data: $('#form1').serialize() ,
+            success:function(data){
+                // alert(data.toString());
+            }
         });
-    });
+    }
 </script>
+
 </body>
 </html>

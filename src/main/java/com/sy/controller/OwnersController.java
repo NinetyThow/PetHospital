@@ -7,8 +7,13 @@ import com.sy.utils.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 public class OwnersController {
@@ -17,6 +22,7 @@ public class OwnersController {
 
     //查询所有主人信息
     @RequestMapping("/AllOwners")
+
     public String AllOwners(@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
        PageBean pb = ownersBiz.CheckAllOwnersMsg(Application.PAGE_SIZE,pageCode);
        modelMap.put("pageBean",pb);
@@ -41,10 +47,16 @@ public class OwnersController {
     }
     //根据宠物ID查询主人信息
     @RequestMapping("/OwnerBypetsId")
-    public String OwnerBypetsId(int petsId){
+    @ResponseBody
+    public Owners OwnerBypetsId(HttpServletRequest request){
+        System.out.println("------------------------------");
+//        System.out.println(petsId);
+        int petsId = Integer.parseInt(request.getParameter("petsId"));
+        System.out.println(petsId);
+
         Owners owners= ownersBiz.CheckOwnersMsgByPetsId(petsId);
 //        System.out.println(owners.getOwnerName()+"---"+owners.getOwnerCity());
-        return "OwnersMsgUpdate";
+        return owners;
     }
     //新增主人信息
     @RequestMapping("/CreateOwner")
