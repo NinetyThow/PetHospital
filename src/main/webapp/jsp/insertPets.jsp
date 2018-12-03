@@ -35,8 +35,8 @@
     <div id="top">
         <div style="font-size: 50px;width: 600px;text-align: center;margin: 0 auto;padding-top: 70px">请填写宠物信息</div>
     </div>
-    <form class="layui-form" action="${pageContext.request.contextPath}/insertPetJsp" id="form" method="post">
-        <input type="hidden" name="val" value="200">
+    <form class="layui-form" action="${pageContext.request.contextPath}/insertPet" id="form" method="post"
+          enctype="multipart/form-data">
         <div class="layui-form-item">
             <label class="layui-form-label" style="width: 150px">宠物名称</label>
             <div class="layui-input-inline">
@@ -87,6 +87,8 @@
             </div>
         </div>
 
+        <input type="file" value="上传头像" name="file1">
+
         <div class="layui-form-item">
             <div class="layui-input-block" style="padding-left: 50px">
                 <button class="layui-btn" lay-submit="" lay-filter="demo1">添加</button>
@@ -95,6 +97,7 @@
         </div>
     </form>
 </div>
+
 <script>
     layui.use(['form', 'layedit', 'laydate'], function () {
         var laydate = layui.laydate;
@@ -107,12 +110,6 @@
             elem: '#date1'
         });
     });
-
-    $(function () {
-        <%if(request.getAttribute("a")!="失败"){%>
-        alert('<%=request.getAttribute("a")%>');
-        <%}%>
-    })
 </script>
 
 </body>

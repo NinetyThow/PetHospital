@@ -17,24 +17,6 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
     @Autowired
     PetHospitalMapper petHospitalMapper;
 
-    /*@Override
-    public PageBean searchPets(int pageSize, int pageCode) {
-        PageBean pb=new PageBean();
-        int allCount= petHospitalMapper.findAllCount();
-        pb.setAllCount(allCount);
-        pb.setPageSize(pageSize);
-        if (pageCode>pb.getAllPages()) {
-            pageCode=pb.getAllPages();
-        }
-        pb.setPageCode(pageCode);
-        Map<String,Object> map=new HashMap<>();
-        map.put("pageSize", pageSize);
-        map.put("pageCode", pageCode);
-        List<Pets> list = petHospitalMapper.findPets(map);
-        pb.setDatas(list);
-        return pb;
-    }*/
-
     @Override
     public Pets searchPetsById(Pets pets) {
         return petHospitalMapper.findPetsById(pets);
@@ -59,11 +41,6 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
         return pb;
     }
 
-    /*@Override
-    public List<Pets> searchPetsByType(Pets pets) {
-        return petHospitalMapper.findPetsByType(pets);
-    }*/
-
     @Transactional(readOnly = false)
     @Override
     public void replacePets(Pets pets) {
@@ -82,8 +59,7 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
         Map<String, Object> map = new HashMap<>();
         map.put("pageSize", pageSize);
         map.put("pageCode", pageCode);
-        map.put("petName",petName);
-        System.out.println("000000000000");
+        map.put("petName", petName);
         int allCount = petHospitalMapper.findAllVisitCount(map);
         System.out.println("1111");
         pb.setAllCount(allCount);
@@ -93,7 +69,6 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
         }
         pb.setPageCode(pageCode);
         List<Visits> list = petHospitalMapper.findVisitsLikeName(map);
-        System.out.println("22222");
         pb.setDatas(list);
         return pb;
     }
@@ -102,16 +77,6 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
     @Override
     public void addVisits(Visits visits) {
         petHospitalMapper.insertVisits(visits);
-    }
-
-    @Override
-    public Types searchTypeById(int typeId) {
-        return petHospitalMapper.findTypeById(typeId);
-    }
-
-    @Override
-    public Owners searchOwnerById(int ownerId) {
-        return petHospitalMapper.findOwnerById(ownerId);
     }
 
     @Override

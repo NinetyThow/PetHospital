@@ -11,6 +11,7 @@ public class Pets {
     private Integer ownerId;
     private Types types;
     private Owners owners;
+    private String petPicture;
     private List<Visits> list = new ArrayList<>();
 
     public int getPetId() {
@@ -67,6 +68,14 @@ public class Pets {
 
     public void setOwners(Owners owners) {
         this.owners = owners;
+    }
+
+    public String getPetPicture() {
+        return petPicture;
+    }
+
+    public void setPetPicture(String petPicture) {
+        this.petPicture = petPicture;
     }
 
     public List<Visits> getList() {

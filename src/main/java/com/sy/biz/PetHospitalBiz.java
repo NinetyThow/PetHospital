@@ -24,12 +24,6 @@ public interface PetHospitalBiz {
     //新增宠物就医记录
     void addVisits(Visits visits);
 
-    //根据类型Id查询类型信息
-    Types searchTypeById(int typeId);
-
-    //根据主人Id查询主人信息
-    Owners searchOwnerById(int ownerId);
-
     //查询宠物的种类
     List<Types> searchTypes();
 

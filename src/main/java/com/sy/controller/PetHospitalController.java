@@ -5,10 +5,14 @@ import com.sy.pojo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -16,24 +20,32 @@ public class PetHospitalController {
     @Resource
     private PetHospitalBiz petHospitalBizImpl;
 
-    @RequestMapping("/insertPet")
-    public String insert(Pets pets) {
-        petHospitalBizImpl.addPets(pets);
-        return "updatePets1";
+    @RequestMapping(value = "/insertPet", method = RequestMethod.POST)
+    public String insert(Pets pets, @RequestParam(value = "file1") MultipartFile file, HttpServletRequest request) {
+        try {
+            String realPath = request.getSession().getServletContext().getRealPath("/upload");
+            String fileName = file.getOriginalFilename();
+            String extensionName = fileName.substring(fileName.lastIndexOf(".") + 1);
+            String newFileName = String.valueOf(System.currentTimeMillis()) + "." + extensionName;
+            File dir = new File(realPath, newFileName);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            file.transferTo(dir);
+            pets.setPetPicture(newFileName);
+            petHospitalBizImpl.addPets(pets);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/insertPetJsp";
     }
 
     @RequestMapping("/insertPetJsp")
-    public String insertPetJsp(String val,ModelMap modelMap, HttpServletRequest request) {
+    public String insertPetJsp(ModelMap modelMap) {
         List<Types> typesList = petHospitalBizImpl.searchTypes();
         List<Owners> ownersList = petHospitalBizImpl.searchOwners();
         modelMap.put("typesList", typesList);
         modelMap.put("ownersList", ownersList);
-        if ("200".equals(val)){
-            request.setAttribute("a","添加成功！！！");
-        }else {
-            request.setAttribute("a","失败");
-        }
-
         return "insertPets";
     }
 
@@ -48,6 +60,7 @@ public class PetHospitalController {
         String petName = pets.getPetName();
         PageBean pb = petHospitalBizImpl.searchPagePetsLikeName(2, pageCode, petName);
         modelMap.put("petsList", pb);
+        modelMap.put("a", petName);
         return "updatePets1";
     }
 
@@ -60,6 +73,13 @@ public class PetHospitalController {
         modelMap.put("ownersList", ownersList);
         modelMap.put("pet", pet);
         return "updatePets2";
+    }
+
+    @RequestMapping("/petDetail")
+    public String petDetail(Pets pets, ModelMap modelMap) {
+        Pets pet = petHospitalBizImpl.searchPetsById(pets);
+        modelMap.put("pet", pet);
+        return "petDetail";
     }
 
     @RequestMapping("/insertVisit")

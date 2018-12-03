@@ -29,12 +29,6 @@ public interface PetHospitalMapper {
     //新增宠物就医记录
     void insertVisits(Visits visits);
 
-    //根据类型Id查询类型信息
-    Types findTypeById(int typeId);
-
-    //根据主人Id查询主人信息
-    Owners findOwnerById(int ownerId);
-
     //查询宠物的类别
     List<Types> findTypes();
 

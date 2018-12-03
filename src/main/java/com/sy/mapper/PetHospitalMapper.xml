@@ -56,8 +56,8 @@
 
     <!--插入宠物的信息-->
     <insert id="insertPets" parameterType="Pets">
-        insert into pets (petName, petBirthday, typeId, ownerId)
-        values (#{petName}, #{petBirthday}, #{typeId}, #{ownerId})
+        insert into pets (petName, petBirthday, typeId, ownerId, petPicture)
+        values (#{petName}, #{petBirthday}, #{typeId}, #{ownerId}, #{petPicture})
     </insert>
 
     <!--分页条件查询出符合条件的就医信息-->
@@ -96,18 +96,6 @@
         insert into visits (petId, vetId, visitDate, description)
         values (#{petId}, #{vetId}, #{visitDate}, #{description})
     </insert>
-
-    <select id="findTypeById" parameterType="int" resultType="Types">
-        select *
-        from types
-        where typeId = #{typeId}
-    </select>
-
-    <select id="findOwnerById" parameterType="int" resultType="Owners">
-        select *
-        from owners
-        where ownerId = #{ownerId}
-    </select>
 
     <!--获取到所有的类型信息-->
     <select id="findTypes" resultType="Types">

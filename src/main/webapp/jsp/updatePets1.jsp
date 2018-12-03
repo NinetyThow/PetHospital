@@ -76,36 +76,41 @@
                     <td style="text-align: center">${pets.petBirthday}</td>
                     <td style="text-align: center">${pets.types.typeName}</td>
                     <td style="text-align: center">${pets.owners.ownerName}</td>
-                    <td style="text-align: center"><a href="${pageContext.request.contextPath}/updatePetJsp2?petId=${pets.petId}">
+                    <td style="text-align: center">
+                        <a href="${pageContext.request.contextPath}/updatePetJsp2?petId=${pets.petId}">
                         <button class="layui-btn layui-btn-primary">更新</button>
-                    </a></td>
+                    </a>
+                        <a href="${pageContext.request.contextPath}/petDetail?petId=${pets.petId}">
+                            <button class="layui-btn layui-btn-primary">详情</button>
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
         <div style="margin: 0 auto;width: 600px">
-            <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=1">
+            <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=1&petName=${requestScope.a}">
                 <button class="layui-btn layui-btn-primary">首页</button>
             </a>
             <c:if test="${requestScope.petsList.pageCode>1}">
-                <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${requestScope.petsList.pageCode-1}">
+                <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${requestScope.petsList.pageCode-1}&petName=${requestScope.a}">
                     <button class="layui-btn layui-btn-primary">上一页</button>
                 </a>
             </c:if>
 
             <c:forEach begin="1" end="${requestScope.petsList.allPages}" step="1" var="page">
-                <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${page}">
+                <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${page}&petName=${requestScope.a}">
                     <button class="layui-btn layui-btn-primary">${page}</button>
                 </a>
             </c:forEach>
 
             <c:if test="${requestScope.petsList.pageCode<requestScope.petsList.allPages}">
-                <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${requestScope.petsList.pageCode+1}">
+                <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${requestScope.petsList.pageCode+1}&petName=${requestScope.a}">
                     <button class="layui-btn layui-btn-primary">下一页</button>
                 </a>
             </c:if>
 
-            <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${requestScope.petsList.allPages}">
+            <a href="${pageContext.request.contextPath}/updatePetJsp?pageCode=${requestScope.petsList.allPages}&petName=${requestScope.a}">
                 <button class="layui-btn layui-btn-primary">尾页</button>
             </a>
         </div>
