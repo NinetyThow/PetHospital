@@ -92,7 +92,7 @@
     }
 </script>
 <%--搜索框--%>
-<div style="background-image: url(/jsp/Ownernew.jpg) ; height: 600px;width: 1920px"></div>
+<div style="background-image: url(/pic/Ownernew.jpg) ; height: 600px;width: 1920px"></div>
 <h1 style="text-align: center ;margin: 30px auto ;width: 400px">用户信息查询</h1>
 <div style="align-content: center;width: 500px; height: 50px; margin: 15px auto ">
         <form action="/AllOwnersLike" method="post">

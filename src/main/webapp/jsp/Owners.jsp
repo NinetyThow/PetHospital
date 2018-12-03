@@ -19,7 +19,7 @@
 
 <jsp:include page="welcome.jsp"/>
 
-<div style="background-image: url(Owner.jpg) ; height: 600px;width: 1920px"></div>
+<div style="background-image: url(../pic/Owner.jpg) ; height: 600px;width: 1920px"></div>
 
 <h1 style="text-align: center; margin: 30px auto;width: 400px">用户信息录入</h1>
 <div style="width:400px;align-content: center;margin: 30px auto">

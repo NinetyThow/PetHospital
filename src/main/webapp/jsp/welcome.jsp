@@ -23,7 +23,7 @@
         <a href="#">医疗团队</a>
         <dl class="layui-nav-child">
             <dd><a href="${pageContext.request.contextPath}/queryVets">查看医师</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/jsp/addVet.jsp">新增医师</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/findAllSpecialty">新增医师</a></dd>
         </dl>
     </li>
     <li class="layui-nav-item"><a href="">诊疗服务</a></li>
@@ -40,9 +40,9 @@
     </li>
 
     <li class="layui-nav-item" lay-unselect="" style="float: right">
-        <a href="javascript:;" id="login"><i class="layui-icon layui-icon-username"></i>${loginedEmp.employeeName}</a>
+        <a href="javascript:;" id="login"><i class="layui-icon layui-icon-username"></i>${sessionScope.loginedEmp.employeeName}</a>
         <dl class="layui-nav-child">
-            <dd><a href="${pageContext.request.contextPath}/jsp/welcome.jsp">退出</a></dd>
+            <dd><a id="exit" href="/exitLogin">退出</a></dd>
         </dl>
     </li>
     <li class="layui-nav-item" style="float: right">
@@ -53,38 +53,43 @@
 <script src="../js/jquery.js" charset="utf-8"></script>
 <script>
     $(function () {
+        if(window.location.pathname === "/jsp/welcome.jsp"){
         $("#login").click(function () {
-            layui.use('layer', function(){
-                var layer = layui.layer;
-                layer.open({
-                    type: 1,
-                    title: false,
-                    closeBtn: 0,
-                    shadeClose: true,
-                    skin: 'yourclass',
-                    content: '<form class="layui-form" action="/empLogin" method="post">\n' +
-                        '    <div class="layui-form-item">\n' +
-                        '        <label class="layui-form-label">用户名</label>\n' +
-                        '        <div class="layui-input-inline">\n' +
-                        '            <input type="text" name="employeeName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">\n' +
-                        '        </div>\n' +
-                        '    </div>\n' +
-                        '    <div class="layui-form-item">\n' +
-                        '        <label class="layui-form-label">密码框</label>\n' +
-                        '        <div class="layui-input-inline">\n' +
-                        '            <input type="password" name="employeePassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">\n' +
-                        '        </div>\n' +
-                        '    </div>\n' +
-                        '    <div class="layui-form-item">\n' +
-                        '        <div class="layui-input-block">\n' +
-                        '            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>\n' +
-                        '            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
-                        '        </div>\n' +
-                        '    </div>\n' +
-                        '</form>'
-                });
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                shadeClose: true,
+                skin: 'yourclass',
+                content: '<form class="layui-form" action="/empLogin" method="post">\n' +
+                    '    <div class="layui-form-item">\n' +
+                    '        <label class="layui-form-label">用户名</label>\n' +
+                    '        <div class="layui-input-inline">\n' +
+                    '            <input type="text" name="employeeName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div class="layui-form-item">\n' +
+                    '        <label class="layui-form-label">密码框</label>\n' +
+                    '        <div class="layui-input-inline">\n' +
+                    '            <input type="password" name="employeePassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div class="layui-form-item">\n' +
+                    '        <div class="layui-input-block">\n' +
+                    '            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>\n' +
+                    '            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</form>'
             });
-        })
+        });
+    })
+
+
+   }
+
     });
     $(function () {
         if(window.location.pathname !== "/jsp/welcome.jsp"){
@@ -98,6 +103,7 @@
                 });
             });
         }
+
 
     });
 

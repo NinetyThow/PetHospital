@@ -13,6 +13,12 @@
     <select id="findAllVets" resultType="int">
         select count(*) from vets
     </select>
+    <select id="findVetsByName" resultType="int">
+        select count(*) from vets where vetName like '%${vetName}%'
+    </select>
+    <select id="findVetsByPageByCondition" parameterType="Map" resultType="Vets">
+        select * from vets where vetName like '%${vetName}%' limit ${(pageCode-1)*pageSize},${pageSize}
+    </select>
     <insert id="createVets" parameterType="Vets">
         insert into vets(vetName) values (#{vetName})
     </insert>
@@ -33,4 +39,7 @@
             </association>
         </collection>
     </resultMap>
+    <select id="findAllSpecialties" resultType="Specialties">
+        select * from specialties
+    </select>
 </mapper>

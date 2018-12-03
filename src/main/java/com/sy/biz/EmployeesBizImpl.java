@@ -1,10 +1,7 @@
 package com.sy.biz;
 
 import com.sy.mapper.EmployeesMapper;
-import com.sy.pojo.Employees;
-import com.sy.pojo.PageBean;
-import com.sy.pojo.VetSpecialty;
-import com.sy.pojo.Vets;
+import com.sy.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +38,25 @@ public class EmployeesBizImpl implements EmployeesBiz {
         return pb;
     }
 
+    @Override
+    public PageBean queryVetsByPageByCondition(int pageSize, int pageCode,String vetName) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("pageSize",pageSize);
+        map.put("pageCode",pageCode);
+        map.put("vetName",vetName);
+        PageBean pb = new PageBean();
+        pb.setPageSize(pageSize);
+        int conditionVets = employeesMapper.findVetsByName(map);
+        pb.setAllCount(conditionVets);
+        if(pageCode > pb.getAllPages()){
+            pageCode = pb.getAllPages();
+        }
+        pb.setPageCode(pageCode);
+        List<Vets> list = employeesMapper.findVetsByPageByCondition(map);
+        pb.setDatas(list);
+        return pb;
+    }
+
     @Transactional(readOnly=false)
     @Override
     public void addVet(Vets vets) {
@@ -61,6 +77,11 @@ public class EmployeesBizImpl implements EmployeesBiz {
     @Override
     public Vets queryVetInfoByVetId(int vetId) {
         return employeesMapper.findVetInfoByVetId(vetId);
+    }
+
+    @Override
+    public List<Specialties> queryAllSpecialties() {
+        return employeesMapper.findAllSpecialties();
     }
 
 }

@@ -14,7 +14,7 @@
     <style>
         #main {
             height: 800px;
-            background: url("/jsp/123.jpg") no-repeat;
+            background: url("/pic/123.jpg") no-repeat;
             background-size: cover;
         }
 

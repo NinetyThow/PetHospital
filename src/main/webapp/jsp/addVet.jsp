@@ -12,6 +12,7 @@
 </head>
 <body>
 <%@ include file="welcome.jsp" %>
+<div style="background-image: url(/pic/about_banner.jpg) ; height: 600px;width: 1920px"></div>
 <div style="margin: 20px auto;width: 600px;height: 400px">
     <form class="layui-form" method="post" action="/addNewVet">
         <div class="layui-form-item">
@@ -23,10 +24,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label">复选框</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="specialtyId" value="1" title="泌尿科">
-                <input type="checkbox" name="specialtyId" value="2" title="眼科">
-                <input type="checkbox" name="specialtyId" value="3" title="外科">
-                <input type="checkbox" name="specialtyId" value="4" title="放射科">
+                <c:forEach items="${specialties}" var="sp">
+                    <input type="checkbox" name="specialtyId" value=${sp.specialtyId} title=${sp.specialtyName}>
+                </c:forEach>
             </div>
         </div>
         <div class="layui-form-item">
