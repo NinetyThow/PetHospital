@@ -9,21 +9,23 @@
 <html>
 <head>
     <title>欢迎来到XX宠物医院</title>
+
 </head>
 <body>
 <%@ include file="welcome.jsp" %>
 <div>
-    <table class="layui-table" style="width: 470px;margin: 20px auto">
+    <table class="layui-table" style="width: 590px;margin: 20px auto">
         <colgroup>
             <col width="150">
             <col width="200">
+            <col width="120">
             <col width="120">
         </colgroup>
         <thead>
         <tr align="center">
             <th>医生ID</th>
             <th>医生姓名</th>
-            <th>医师详情</th>
+            <th>医师技能</th>
         </tr>
         </thead>
         <tbody>
@@ -31,7 +33,7 @@
             <tr align="center">
                 <td>${Vets.vetId }</td>
                 <td>${Vets.vetName }</td>
-                <td><button class="layui-btn">点击查看</button></td>
+                <td><button class="layui-btn view">查看详情</button></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -60,5 +62,57 @@
         <button class="layui-btn layui-btn-sm">末页</button>
     </a>
 </div>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script src="../js/jquery.js" charset="utf-8"></script>
+<script>
+    $(function () {
+
+        $(".view").click(function () {
+            var temp=this;
+            $.ajax({
+                type : "post",
+                dataType : "json",
+                url : "findVetInfo?vetId="+$(temp).parent().prev().prev().text(),
+                success : function(result) {
+                    var str = "";
+                   for(var p in result.Vets.list){
+                        str+=result.Vets.list[p].specialties.specialtyName+"&nbsp;&nbsp;"
+                    }
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 0,
+                            shadeClose: true,
+                            area: ['500px', '240px'],
+                            skin: 'yourclass',
+                            // language=HTML
+                            content:'<table class="layui-table" style="width: 420px;margin: 20px auto">\n' +
+                                '        <colgroup>\n' +
+                                '            <col width="210">\n' +
+                                '            <col width="210">\n' +
+                                '        </colgroup>\n' +
+                                '        <thead>\n' +
+                                '        <tr align="center">\n' +
+                                '            <th>医生姓名</th>\n' +
+                                '            <th>医师技能</th>\n' +
+                                '        </tr>\n' +
+                                '        </thead>\n' +
+                                '        <tbody>\n' +
+                                '            <tr align="center">\n' +
+                                '                <td>'+result.Vets.vetName+'</td>\n' +
+                                '                <td>'+str+'</td>\n' +
+                                '            </tr>\n' +
+                                '        </tbody>\n' +
+                                '    </table>'
+                        })
+                    })
+
+                }
+            })
+        })
+    })
+</script>
 </body>
 </html>
