@@ -91,11 +91,11 @@
         })
     }
 </script>
-<div style="background-image: url(/jsp/Ownernew.jpg) ; height: 600px;width: 1920px"></div>
 <%--搜索框--%>
-
+<div style="background-image: url(/jsp/Ownernew.jpg) ; height: 600px;width: 1920px"></div>
+s
 <div style="align-content: center;width: 500px; margin: 10px auto">
-        <form action="/AllOwnersLike"  method="post">
+        <form action="/AllOwnersLike" method="post">
                 <div style="float: left;width: 400px">
                     <input type="text" name="ownerId" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
                 </div>
@@ -137,25 +137,25 @@
 
 <div style="align-content: center;width: 800px; margin: 10px auto">
     <div style="text-align: center ;align-content: center">
-    <a href="AllOwners?pageCode=1">
+    <a href="AllOwnersLike?pageCode=1&ownerId=${requestScope.ownerId}">
         <button class="layui-btn layui-btn-sm">首页</button>
     </a>
     <c:if test="${pageBean.pageCode>1 }">
-        <a href="AllOwners?pageCode=${pageBean.pageCode-1 }">
+        <a href="AllOwnersLike?pageCode=${pageBean.pageCode-1 }&ownerId=${requestScope.ownerId}">
             <button class="layui-btn layui-btn-sm">上一页</button>
         </a>
     </c:if>
     <c:forEach var="pageCode" begin="1" end="${pageBean.allPages }" step="1">
-        <a href="AllOwners?pageCode=${pageCode }">
+        <a href="AllOwnersLike?pageCode=${pageCode }&ownerId=${requestScope.ownerId}">
             <button class="layui-btn layui-btn-sm">${pageCode}</button>
         </a>
     </c:forEach>
     <c:if test="${pageBean.pageCode<pageBean.allPages }">
-        <a href="AllOwners?pageCode=${pageBean.pageCode+1 }">
+        <a href="AllOwnersLike?pageCode=${pageBean.pageCode+1 }&ownerId=${requestScope.ownerId}">
             <button class="layui-btn layui-btn-sm">下一页</button>
         </a>
     </c:if>
-    <a href="AllOwners?pageCode=${pageBean.allPages }">
+    <a href="AllOwnersLike?pageCode=${pageBean.allPages }&ownerId=${requestScope.ownerId}">
         <button class="layui-btn layui-btn-sm">末页</button>
     </a>
     </div>

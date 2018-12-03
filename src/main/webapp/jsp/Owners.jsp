@@ -19,6 +19,8 @@
 
 <jsp:include page="welcome.jsp"/>
 
+<div style="background-image: url(Owner.jpg) ; height: 600px;width: 1920px"></div>
+
 <div style="width:400px;align-content: center;margin: 30px auto">
 <form class="layui-form layui-form-pane" action="/CreateOwner" method="post">
     <div class="layui-form-item">

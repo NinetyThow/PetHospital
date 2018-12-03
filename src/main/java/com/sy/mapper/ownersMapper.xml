@@ -50,6 +50,25 @@
         values (default ,#{ownerName},#{ownerAddress},#{ownerCity},#{ownerTelephone})
     </insert>
 
+    <!--模糊查询主人信息-->
 
+    <select id="findOwnersLike" parameterType="Map" resultType="Owners">
+        select * from owners
+        where
+                ownerName like '%${ownerId}%'
+                or ownerAddress like '%${ownerId}%'
+                or ownerTelephone like '%${ownerId}%'
+                or ownerCity like '%${ownerId}%'
+        limit ${(pageCode-1)*pageSize},${pageSize}
+    </select>
+
+    <select id="findCountOwnersLike" parameterType="Map" resultType="int">
+        select COUNT(*) from owners
+        where
+                ownerName like '%${ownerId}%'
+                or ownerAddress like '%${ownerId}%'
+                or ownerTelephone like '%${ownerId}%'
+                or ownerCity like '%${ownerId}%'
+    </select>
 
 </mapper>

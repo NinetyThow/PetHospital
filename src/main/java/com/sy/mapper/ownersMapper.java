@@ -11,7 +11,11 @@ public interface ownersMapper {
 
     List<Owners> CheckAllOwnersMsg(Map<String, Integer> map );
 
+    List<Owners> findOwnersLike(Map<String, Object> map );
+
     int findAllCount();
+
+    int findCountOwnersLike(Map<String, Object> map);
 
     Owners CheckOwnersMsgByPetsId(int petId);
 

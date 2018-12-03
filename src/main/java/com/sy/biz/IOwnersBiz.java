@@ -9,6 +9,9 @@ public interface IOwnersBiz {
    //查询所有主人的信息
    public PageBean CheckAllOwnersMsg(int pageSize, int pageCode);
 
+   //模糊查询主人的信息
+   public PageBean findOwnersLike(int pageSize, int pageCode,String ownerId);
+
    //根据主人ID查找主人信息
    public Owners findOwnersById(int ownerId);
 

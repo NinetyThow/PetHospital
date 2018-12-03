@@ -40,6 +40,30 @@ public class OwnersBiz implements IOwnersBiz{
     }
 
     @Override
+    public PageBean findOwnersLike(int pageSize, int pageCode, String ownerId) {
+        PageBean pb = new PageBean();
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("pageSize", pageSize);
+        map.put("pageCode", pageCode);
+        map.put("ownerId",ownerId);
+
+        int allCount = ownersMapper.findCountOwnersLike(map);
+        pb.setAllCount(allCount);
+        pb.setPageSize(pageSize);
+
+        if(pageCode > pb.getAllPages()) {
+            pageCode = pb.getAllPages();
+        }
+        pb.setPageCode(pageCode);
+
+
+        List<Owners> owners = ownersMapper.findOwnersLike(map);
+        pb.setDatas(owners);
+        return pb;
+    }
+
+    @Override
     public Owners findOwnersById(int ownerId) {
 
        return ownersMapper.findOwnersById(ownerId);

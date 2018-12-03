@@ -19,7 +19,9 @@
 <body>
 <jsp:include page="welcome.jsp"/>
 
-<div style="width:400px;align-content: center;margin: 30px auto">
+<div style="background-image: url(Owner.jpg) ; height: auto;width: auto"></div>
+
+<div style="width:400px;align-content: center;margin: 50px auto">
     <form class="layui-form layui-form-pane" action="UpdateOwnerMsg" method="post">
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>

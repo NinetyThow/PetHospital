@@ -22,29 +22,61 @@ public class OwnersController {
 
     //查询所有主人信息
     @RequestMapping("/AllOwners")
-
     public String AllOwners(@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
        PageBean pb = ownersBiz.CheckAllOwnersMsg(Application.PAGE_SIZE,pageCode);
        modelMap.put("pageBean",pb);
 //        System.out.println(pb.getDatas());
         return "OwnersEdit";
     }
+
+    //模糊查询主人信息
+    @RequestMapping("/AllOwnersLike")
+    public String AllOwnersLike(String ownerId,@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
+        System.out.println(ownerId);
+       PageBean pb = ownersBiz.findOwnersLike(Application.PAGE_SIZE,pageCode,ownerId);
+       modelMap.put("pageBean",pb);
+       modelMap.put("ownerId",ownerId);
+//        System.out.println(pb.getDatas());
+        return "OwnersEditNew";
+    }
+
     //根据主人ID查询主人信息
-    @RequestMapping("/showOwnersMsg")
-    public  String findOwnersById(int ownerId,int pageCode , ModelMap modelMap){
-        Owners owners = ownersBiz.findOwnersById(ownerId);
+//    @RequestMapping("/showOwnersMsg")
+//    public  String findOwnersById(int ownerId,int pageCode , ModelMap modelMap){
+//        Owners owners = ownersBiz.findOwnersById(ownerId);
+////        System.out.println(pageCode);
+//        modelMap.put("owners",owners);
+//        modelMap.put("pageCode",pageCode);
+//        return "OwnersMsgUpdate";
+//    }
+
+    //根据主人ID查询主人信息Test
+    @RequestMapping("/showOwnersMsgById")
+    @ResponseBody
+    public  Owners findOwnersByOwnerId(String ownerId){
+        int Id = Integer.parseInt(ownerId);
+        System.out.println(Id);
+        Owners owners = ownersBiz.findOwnersById(Id);
 //        System.out.println(pageCode);
-        modelMap.put("owners",owners);
-        modelMap.put("pageCode",pageCode);
-        return "OwnersMsgUpdate";
+//        modelMap.put("owners",owners);
+//        modelMap.put("pageCode",pageCode);
+        return owners;
     }
     //更新主人信息
     @RequestMapping("/UpdateOwnerMsg")
-    public String UpdateOwnerMsg(int pageCode ,Owners owners){
+    public String UpdateOwnerMsg(Owners owners){
+//        System.out.println("------------------------");
+//        System.out.println(owners.getOwnerId());
+//        System.out.println(owners.getOwnerName());
+//        System.out.println(owners.getOwnerAddress());
+//        System.out.println(owners.getOwnerCity());
+//        System.out.println(owners.getOwnerTelephone());
         ownersBiz.UpdateOwners(owners);
 //        System.out.println(pageCode);
-        return "redirect:/AllOwners?pageCode="+pageCode;
+        return "redirect:/AllOwners?pageCode=1";
     }
+
+
     //根据宠物ID查询主人信息
     @RequestMapping("/OwnerBypetsId")
     @ResponseBody
