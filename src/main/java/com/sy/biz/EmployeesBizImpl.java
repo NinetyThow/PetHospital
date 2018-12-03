@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,16 +40,27 @@ public class EmployeesBizImpl implements EmployeesBiz {
         pb.setDatas(list);
         return pb;
     }
+
     @Transactional(readOnly=false)
     @Override
-    public void addWholeVet(Vets vets) {
+    public void addVet(Vets vets) {
         employeesMapper.createVets(vets);
-        List<VetSpecialty> vetSpecialtyList = vets.getList();
-        for (VetSpecialty vetSpecialty:
-                vetSpecialtyList) {
-            employeesMapper.createVetSpecialty(vetSpecialty);
-            Integer specialtyId = vetSpecialty.getSpecialtyId();
-
-        }
     }
+
+    @Transactional(readOnly=false)
+    @Override
+    public void addVetSpecialty(VetSpecialty vetSpecialty) {
+        employeesMapper.createVetSpecialty(vetSpecialty);
+    }
+
+    @Override
+    public int queryNewVetId() {
+        return employeesMapper.findNewVetId();
+    }
+
+    @Override
+    public Vets queryVetInfoByVetId(int vetId) {
+        return employeesMapper.findVetInfoByVetId(vetId);
+    }
+
 }

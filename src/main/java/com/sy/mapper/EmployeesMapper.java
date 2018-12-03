@@ -20,5 +20,9 @@ public interface EmployeesMapper {
     //点击添加医师按钮添加一名医师并添加其特长
     void createVets(Vets vets);
     void createVetSpecialty(VetSpecialty vetSpecialty);
+    //找到新添加兽医的ID
+    int findNewVetId();
+    //查询被选中兽医的详情页面
+    Vets findVetInfoByVetId(int vetId);
 
 }

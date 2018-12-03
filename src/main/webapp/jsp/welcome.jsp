@@ -19,7 +19,13 @@
 <body>
 <ul class="layui-nav layui-bg-green">
     <li class="layui-nav-item"><a href="">医院首页</a></li>
-    <li class="layui-nav-item layui-this"><a href="">医疗团队</a></li>
+    <li class="layui-nav-item">
+        <a href="#">医疗团队</a>
+        <dl class="layui-nav-child">
+            <dd><a href="${pageContext.request.contextPath}/queryVets">查看医师</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/jsp/addVet.jsp">新增医师</a></dd>
+        </dl>
+    </li>
     <li class="layui-nav-item"><a href="">诊疗服务</a></li>
     <li class="layui-nav-item">
         <a href="javascript:;">信息管理</a>
@@ -34,11 +40,9 @@
     </li>
 
     <li class="layui-nav-item" lay-unselect="" style="float: right">
-        <a href="javascript:;" id="login"><i class="layui-icon layui-icon-username"></i></a>
+        <a href="javascript:;" id="login"><i class="layui-icon layui-icon-username"></i>${loginedEmp.employeeName}</a>
         <dl class="layui-nav-child">
-            <dd><a href="javascript:;">修改信息</a></dd>
-            <dd><a href="javascript:;">安全管理</a></dd>
-            <dd><a href="javascript:;">退了</a></dd>
+            <dd><a href="${pageContext.request.contextPath}/jsp/welcome.jsp">退出</a></dd>
         </dl>
     </li>
     <li class="layui-nav-item" style="float: right">
@@ -58,10 +62,10 @@
                     closeBtn: 0,
                     shadeClose: true,
                     skin: 'yourclass',
-                    content: '<form class="layui-form" action="/login" method="post">\n' +
+                    content: '<form class="layui-form" action="/empLogin" method="post">\n' +
                         '    <div class="layui-form-item">\n' +
                         '        <label class="layui-form-label">用户名</label>\n' +
-                        '        <div class="layui-input-block">\n' +
+                        '        <div class="layui-input-inline">\n' +
                         '            <input type="text" name="employeeName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">\n' +
                         '        </div>\n' +
                         '    </div>\n' +
@@ -81,16 +85,22 @@
                 });
             });
         })
-    })
-    layui.use('element', function(){
-        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-
-        //监听导航点击
-        element.on('nav(demo)', function(elem){
-            //console.log(elem)
-            layer.msg(elem.text());
-        });
     });
+    $(function () {
+        if(window.location.pathname !== "/jsp/welcome.jsp"){
+            layui.use('element', function(){
+                var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+                //监听导航点击
+                element.on('nav(demo)', function(elem){
+                    //console.log(elem)
+                    layer.msg(elem.text());
+                });
+            });
+        }
+
+    });
+
 </script>
 </body>
 </html>

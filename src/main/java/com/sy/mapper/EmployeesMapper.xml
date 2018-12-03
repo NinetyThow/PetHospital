@@ -16,7 +16,21 @@
     <insert id="createVets" parameterType="Vets">
         insert into vets(vetName) values (#{vetName})
     </insert>
-    <insert id="createVetSpecialty" parameterType="Vets">
+    <insert id="createVetSpecialty" parameterType="vetSpecialty">
         insert into vet_specialty(vetId, specialtyId) values (#{vetId},#{specialtyId})
     </insert>
+    <select id="findNewVetId" resultType="int">
+        select max(vetId) from vets
+    </select>
+    <select id="findVetInfoByVetId" parameterType="int" resultMap="VetInfoResultmap">
+        select * from vets inner join vet_specialty v on vets.vetId = v.vetId inner join specialties s on v.specialtyId = s.specialtyId where vets.vetId = #{vetId}
+    </select>
+    <resultMap id="VetInfoResultmap" type="Vets" autoMapping="true">
+        <id property="vetId" column="vetId"/>
+        <collection property="list" ofType="VetSpecialty" autoMapping="true">
+            <association property="specialties" javaType="Specialties" autoMapping="true">
+                <id property="specialtyId" column="specialtyId"/>
+            </association>
+        </collection>
+    </resultMap>
 </mapper>
