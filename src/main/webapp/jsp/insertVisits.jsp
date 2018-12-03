@@ -79,7 +79,7 @@
         </div>
 
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">就医描述</label>
+            <label class="layui-form-label">就医详情</label>
             <div class="layui-input-block" style="width: 370px">
                 <textarea placeholder="请输入内容" class="layui-textarea" name="description"></textarea>
             </div>
