@@ -52,7 +52,6 @@
         $("#login").click(function () {
             layui.use('layer', function(){
                 var layer = layui.layer;
-
                 layer.open({
                     type: 1,
                     title: false,
@@ -81,7 +80,6 @@
                         '</form>'
                 });
             });
-
         })
     })
     layui.use('element', function(){
