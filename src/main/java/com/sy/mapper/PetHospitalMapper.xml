@@ -30,6 +30,7 @@
                  inner join owners o on pets.ownerId = o.ownerId
                  inner join types t on pets.typeId = t.typeId
         where petName like '%${petName}%'
+        order by petId
         limit ${(pageCode-1)*pageSize},${pageSize}
     </select>
 
