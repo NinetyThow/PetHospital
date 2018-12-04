@@ -11,6 +11,7 @@ public class Owners {
     private String ownerCity;
     private String ownerTelephone;
     private List<Pets> petsList = new ArrayList<>();
+    private List<Orders> ordersList=new ArrayList<>();
 
     public int getOwnerId() {
         return ownerId;
@@ -66,5 +67,13 @@ public class Owners {
 
     public void setPetsList(List<Pets> petsList) {
         this.petsList = petsList;
+    }
+
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
     }
 }
