@@ -7,6 +7,7 @@ public class Owners {
     private int ownerId;
     private String ownerName;
     private String ownerAddress;
+    private String ownerPassword;
     private String ownerCity;
     private String ownerTelephone;
     private List<Pets> petsList = new ArrayList<>();
@@ -25,6 +26,14 @@ public class Owners {
 
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
+    }
+
+    public String getOwnerPassword() {
+        return ownerPassword;
+    }
+
+    public void setOwnerPassword(String ownerPassword) {
+        this.ownerPassword = ownerPassword;
     }
 
     public String getOwnerAddress() {
