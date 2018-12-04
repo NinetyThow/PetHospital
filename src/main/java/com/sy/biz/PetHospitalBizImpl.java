@@ -99,4 +99,9 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
         return petHospitalMapper.findVets();
     }
 
+    @Override
+    public Owners searchOwnerInfoByNameOrPhone(String LoginInfo) {
+        return petHospitalMapper.findOwnerInfoByNameOrPhone(LoginInfo);
+    }
+
 }

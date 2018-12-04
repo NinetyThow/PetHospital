@@ -35,4 +35,7 @@ public interface PetHospitalBiz {
 
     //查询兽医的信息
     List<Vets> searchVets();
+
+    //根据主人的名称和手机号获取主人的名称和密码
+    Owners searchOwnerInfoByNameOrPhone(String LoginInfo);
 }
