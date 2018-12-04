@@ -3,7 +3,6 @@ package com.sy.controller;
 import com.sy.biz.IOwnersBiz;
 import com.sy.pojo.Owners;
 import com.sy.pojo.PageBean;
-import com.sy.utils.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,7 +22,7 @@ public class OwnersController {
     //查询所有主人信息
     @RequestMapping("/AllOwners")
     public String AllOwners(@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
-       PageBean pb = ownersBiz.CheckAllOwnersMsg(Application.PAGE_SIZE,pageCode);
+       PageBean pb = ownersBiz.CheckAllOwnersMsg(5,pageCode);
        modelMap.put("pageBean",pb);
 //        System.out.println(pb.getDatas());
         return "OwnersEdit";
@@ -33,7 +32,7 @@ public class OwnersController {
     @RequestMapping("/AllOwnersLike")
     public String AllOwnersLike(String ownerId,@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
         System.out.println(ownerId);
-       PageBean pb = ownersBiz.findOwnersLike(Application.PAGE_SIZE,pageCode,ownerId);
+       PageBean pb = ownersBiz.findOwnersLike(5,pageCode,ownerId);
        modelMap.put("pageBean",pb);
        modelMap.put("ownerId",ownerId);
 //        System.out.println(pb.getDatas());

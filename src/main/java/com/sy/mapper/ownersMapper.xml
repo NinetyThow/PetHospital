@@ -34,8 +34,6 @@
         </collection>
     </resultMap>
 
-
-
     <!--更新宠物主人的信息-->
 
     <update id="UpdateOwners" parameterType="Owners">
@@ -44,10 +42,9 @@
     </update>
 
     <!--添加新客户-->
-
     <insert id="CreateOwner" parameterType="Owners">
         insert  into owners
-        values (default ,#{ownerName},#{ownerAddress},#{ownerCity},#{ownerTelephone})
+        values (default ,#{ownerName},#{ownerPassword},#{ownerAddress},#{ownerCity},#{ownerTelephone})
     </insert>
 
     <!--模糊查询主人信息-->

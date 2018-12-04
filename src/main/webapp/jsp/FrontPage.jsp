@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>欢迎来到XX宠物医院</title>
+    <title>欢迎来到约德尔宠物医院</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -32,13 +32,13 @@
 </head>
 <body>
 <ul class="layui-nav layui-bg-green">
-    <li class="layui-nav-item"><a href="">医院首页</a></li>
+    <li class="layui-nav-item"><a href="/jsp/MainPage.jsp">医院首页</a></li>
     <li class="layui-nav-item">
-        <a href="#">医疗团队</a>
-        <dl class="layui-nav-child">
-            <dd><a href="${pageContext.request.contextPath}/queryVets">查看医师</a></dd>
-            <dd><a href="${pageContext.request.contextPath}/findAllSpecialty">新增医师</a></dd>
-        </dl>
+        <a href="/jsp/AboutUs.jsp">关于我们</a>
+        <%--<dl class="layui-nav-child">--%>
+            <%--<dd><a href="${pageContext.request.contextPath}/queryVets">查看医师</a></dd>--%>
+            <%--<dd><a href="${pageContext.request.contextPath}/findAllSpecialty">新增医师</a></dd>--%>
+        <%--</dl>--%>
     </li>
     <li class="layui-nav-item"><a href="">诊疗服务</a></li>
     <li class="layui-nav-item">
