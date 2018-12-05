@@ -5,44 +5,108 @@
   Time: 16:13
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Title</title>
-    <script src="../js/jquery.js" charset="utf-8"></script>
-    <script>
-
-    </script>
 </head>
 <body>
 <%@ include file="welcome.jsp" %>
 
-<div style="width: 500px;margin: 0 auto;top: 500px;">
-    <form class="layui-form layui-form-pane" action="">
+<div style="width: 310px;margin: 0 auto;top: 500px;">
+    <div style="height: 100px;text-align: center;font-size: 20px;line-height: 100px">欢迎登录</div>
+    <form class="layui-form-pane" action="/session" method="post">
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-inline">
-                <input type="text" name="username" id=""
+                <input type="text" name="LoginInfo" id="LoginInfo"
                        lay-verify="required" placeholder="请输入用户名或手机号码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">abb</div>
+        </div>
+
+        <input type="hidden" name="username" id="hiddenInput">
+
+        <div style="height: 30px">
+            <div style="width: 110px;height:30px;float: left"></div>
+            <div id="loginTip" style="float: left;color: red"></div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">密码</label>
             <div class="layui-input-inline">
-                <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                <input type="password" name="password" id="password"
+                       lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">abb</div>
         </div>
 
+        <div style="height: 30px">
+            <div style="width: 110px;height:30px;float: left"></div>
+            <div style="float: left;color: red" id="passTip"></div>
+        </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">登录</button>
-                <button type="reset" class="layui-btn layui-btn-primary">注册</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </form>
+
+    <script>
+        layui.use(['form', 'layedit', 'laydate'], function () {
+        });
+    </script>
 </div>
 </body>
+<script src="../js/jquery.cookie.js" charset="utf-8"></script>
+<script>
+    var username;
+    var password;
+
+    $(function () {
+        $("#LoginInfo").blur(function () {
+            if ($("#LoginInfo").val() !== "") {
+                $.ajax({
+                    type: "POST",
+                    data: $("#LoginInfo").val(),
+                    contentType: "application/json;charset=utf-8",
+                    url: "/frontLogin?LoginInfo",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.owner === null) {
+                            $("#loginTip").html("用户名不存在");
+                        } else {
+                            $("#loginTip").html("");
+                            username = data.owner.ownerName;
+                            $("#hiddenInput").attr("value",username);
+                            password = data.owner.ownerPassword;
+                        }
+                    },
+                    error: function (jqXHR) {
+                        console.log("Error: " + jqXHR.status);
+                    }
+                })
+            }
+        });
+
+
+        $("#password").blur(function () {
+            if (password !== $("#password").val() && $("#password").val() !== "") {
+                $("#passTip").html("用户名或密码错误");
+            } else {
+                $("#passTip").html("")
+            }
+        });
+
+        $("form").submit(function (e) {
+            var str = $("#passTip").html() + $("#LoginInfo").html();
+            if (str !== "") {
+                alert(str);
+                e.preventDefault();
+            } else {
+                $.cookie('username', username);
+                $.cookie('password', password);
+            }
+        })
+    })
+</script>
 </html>
