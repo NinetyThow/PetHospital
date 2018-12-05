@@ -43,4 +43,6 @@ public interface PetHospitalMapper {
 
     //根据主人的名称和手机号获取主人的名称和密码
     Owners findOwnerInfoByNameOrPhone(String LoginInfo);
+
+    List<Orders> findOrders(Map<String, Object> map);
 }

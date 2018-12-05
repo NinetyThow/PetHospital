@@ -2,6 +2,7 @@ package com.sy.controller;
 
 import com.sy.biz.PetHospitalBiz;
 import com.sy.pojo.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,9 +118,10 @@ public class PetHospitalController {
     }
 
     @RequestMapping("/session")
-    public  String loginSession(HttpSession session,String username,String password){
+    public  String loginSession(HttpSession session,String username,String password,String userPhone){
         session.setAttribute("frontUsername",username);
         session.setAttribute("frontPassword",password);
+        session.setAttribute("frontPhone",userPhone);
         return "FrontPage";
     }
 
@@ -126,6 +129,12 @@ public class PetHospitalController {
     public  String removeSession(HttpSession session){
         session.invalidate();
         return "FrontPage";
+    }
+
+    @RequestMapping(value = "/getOrders", method=RequestMethod.GET)
+    @ResponseBody
+    public List frontLogin(String orderStatus,String condition){
+        return petHospitalBizImpl.searchOrders(orderStatus,condition);
     }
 
 }

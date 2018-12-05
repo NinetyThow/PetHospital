@@ -104,4 +104,12 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
         return petHospitalMapper.findOwnerInfoByNameOrPhone(LoginInfo);
     }
 
+    @Override
+    public List<Orders> searchOrders(String orderStatus, String condition) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderStatus", orderStatus);
+        map.put("condition", condition);
+        return petHospitalMapper.findOrders(map);
+    }
+
 }

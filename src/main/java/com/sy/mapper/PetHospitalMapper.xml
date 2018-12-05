@@ -123,9 +123,38 @@
 
     <!--根据主人的名称和手机号获取主人的名称和密码-->
     <select id="findOwnerInfoByNameOrPhone" parameterType="String" resultType="Owners">
-        select o.ownerName, o.ownerPassword
+        select o.ownerName, o.ownerPassword, o.ownerTelephone
         from owners o
         where o.ownerName = #{LoginInfo}
            or o.ownerTelephone = #{LoginInfo}
     </select>
+
+    <select id="findOrders" resultMap="orderInfo" parameterType="Map">
+        select *
+        from orders o
+        inner join owners o2 on o.ownerId = o2.ownerId
+        inner join vets v on o.vetId = v.vetId
+        where
+        <if test="orderStatus == null">
+            o.orderStatus =#{orderStatus}
+            or o2.ownerName like '%${condition}%'
+            or v.vetName like '%${condition}%'
+        </if>
+
+        <if test="orderStatus != null">
+            o2.ownerName like '%${condition}%'
+            or v.vetName like '%${condition}%'
+        </if>
+
+    </select>
+
+    <resultMap id="orderInfo" type="Orders" autoMapping="true">
+        <id property="orderId" column="orderId"/>
+        <association property="owners" javaType="Owners" autoMapping="true">
+            <id property="ownerId" column="ownerId"/>
+        </association>
+        <association property="vets" javaType="Vets" autoMapping="true">
+            <id property="vetId" column="vetId"/>
+        </association>
+    </resultMap>
 </mapper>

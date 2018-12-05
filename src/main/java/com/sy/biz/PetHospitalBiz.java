@@ -38,4 +38,6 @@ public interface PetHospitalBiz {
 
     //根据主人的名称和手机号获取主人的名称和密码
     Owners searchOwnerInfoByNameOrPhone(String LoginInfo);
+
+    List<Orders> searchOrders(String orderStatus,String condition);
 }

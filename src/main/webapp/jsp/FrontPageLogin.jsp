@@ -26,6 +26,8 @@
 
         <input type="hidden" name="username" id="hiddenInput">
 
+        <input type="hidden" name="userPhone" id="phoneInput">
+
         <div style="height: 30px">
             <div style="width: 110px;height:30px;float: left"></div>
             <div id="loginTip" style="float: left;color: red"></div>
@@ -83,6 +85,7 @@
                             $("#loginTip").html("");
                             username = data.owner.ownerName;
                             $("#hiddenInput").attr("value",username);
+                            $("#phoneInput").attr("value",data.owner.ownerTelephone);
                             password = data.owner.ownerPassword;
                         }
                     },
