@@ -55,14 +55,24 @@
     </li>
 
     <li class="layui-nav-item" lay-unselect="" style="float: right">
-        <a href="javascript:;" id="login">
-            <i class="layui-icon layui-icon-username"></i>
-        </a>
+        <c:if test="${sessionScope.frontUsername==null}">
+            <a href="javascript:;" id="login">
+                <i class="layui-icon layui-icon-username"></i>
+            </a>
+            <dl class="layui-nav-child">
+                <dd><a href="/jsp/FrontPageLogin.jsp">登录</a></dd>
+                <dd><a href="">注册</a></dd>
+            </dl>
+        </c:if>
 
-        <dl class="layui-nav-child">
-            <dd><a href="">登录</a></dd>
-            <dd><a href="">注册</a></dd>
-        </dl>
+        <c:if test="${sessionScope.frontUsername!=null}">
+            <a href="javascript:;">
+                <i class="layui-icon layui-icon-username"></i>${sessionScope.frontUsername}
+            </a>
+            <dl class="layui-nav-child">
+                <dd><a href="/removeSession">退出</a></dd>
+            </dl>
+        </c:if>
     </li>
     <li class="layui-nav-item" style="float: right">
         <i class="layui-icon layui-icon-chat"></i>&nbsp;&nbsp;|&nbsp;&nbsp;400-601-2291

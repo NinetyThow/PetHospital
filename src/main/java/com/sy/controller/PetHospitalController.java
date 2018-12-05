@@ -4,14 +4,12 @@ import com.sy.biz.PetHospitalBiz;
 import com.sy.pojo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -108,13 +106,26 @@ public class PetHospitalController {
         return "findVisits";
     }
 
-    @RequestMapping("/frontLogin")
+    @RequestMapping(value = "/frontLogin", method=RequestMethod.POST)
     @ResponseBody
-    public Map frontLogin(String LoginInfo){
+    public Map frontLogin(@RequestBody String LoginInfo){
         Map<String,Owners> map=new HashMap<>();
         Owners owners = petHospitalBizImpl.searchOwnerInfoByNameOrPhone(LoginInfo);
         map.put("owner",owners);
         return map;
+    }
+
+    @RequestMapping("/session")
+    public  String loginSession(HttpSession session,String username,String password){
+        session.setAttribute("frontUsername",username);
+        session.setAttribute("frontPassword",password);
+        return "FrontPage";
+    }
+
+    @RequestMapping("/removeSession")
+    public  String removeSession(HttpSession session){
+        session.invalidate();
+        return "FrontPage";
     }
 
 }
