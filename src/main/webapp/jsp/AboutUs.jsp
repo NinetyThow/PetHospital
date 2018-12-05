@@ -199,7 +199,7 @@
                         为爱宠提供人性化、高品质的健康服务体验。
                     </div>
                     <span class="button-bubble transition">
-                        <a class="button" href="">立即咨询</a>
+                        <a class="button" href="/jsp/OnlineBooking.jsp">立即咨询</a>
                         <span class="bghover"></span>
                     </span>
 

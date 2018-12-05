@@ -40,7 +40,7 @@
             <%--<dd><a href="${pageContext.request.contextPath}/findAllSpecialty">新增医师</a></dd>--%>
         <%--</dl>--%>
     </li>
-    <li class="layui-nav-item"><a href="">诊疗服务</a></li>
+    <li class="layui-nav-item"><a href="/jsp/OnlineBooking.jsp">诊疗服务</a></li>
     <li class="layui-nav-item">
         <a href="javascript:;">信息管理</a>
         <dl class="layui-nav-child">
