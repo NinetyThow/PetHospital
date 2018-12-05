@@ -14,7 +14,7 @@
 <%@ include file="welcome.jsp" %>
 
 <div style="width: 310px;margin: 0 auto;top: 500px;">
-    <div style="height: 100px;text-align: center;font-size: 20px;line-height: 100px">欢迎登录</div>
+    <div style="height: 100px;text-align: center;font-size: 25px;line-height: 100px">欢 &nbsp;迎  &nbsp;登  &nbsp;录</div>
     <form class="layui-form-pane" action="/session" method="post">
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
@@ -43,11 +43,16 @@
             <div style="width: 110px;height:30px;float: left"></div>
             <div style="float: left;color: red" id="passTip"></div>
         </div>
+
         <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <div class="layui-input-block" style="margin-left: 0">
+                <button class="layui-btn" lay-submit lay-filter="formDemo" style="width: 300px">登录</button>
             </div>
+        </div>
+
+        <div style="width: 300px;height: 30px">
+            <div style="float: left"><a>忘记密码</a></div>
+            <div style="float: right"><a>注册</a></div>
         </div>
     </form>
 
@@ -87,7 +92,6 @@
                 })
             }
         });
-
 
         $("#password").blur(function () {
             if (password !== $("#password").val() && $("#password").val() !== "") {
