@@ -19,4 +19,10 @@ public interface EmployeesBiz {
     Vets queryVetInfoByVetId(int vetId);
 
     List<Specialties> queryAllSpecialties();
+
+    String queryOwnersByName(String ownerName);
+
+    String queryOwnerByPhone(String ownerTelephone);
+
+    void registerUser(Owners owners);
 }

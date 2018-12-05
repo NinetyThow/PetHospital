@@ -84,4 +84,19 @@ public class EmployeesBizImpl implements EmployeesBiz {
         return employeesMapper.findAllSpecialties();
     }
 
+    @Override
+    public String queryOwnersByName(String ownerName) {
+        return employeesMapper.findOwnersByName(ownerName);
+    }
+
+    @Override
+    public String queryOwnerByPhone(String ownerTelephone) {
+        return employeesMapper.findOwnerByPhone(ownerTelephone);
+    }
+    @Transactional(readOnly=false)
+    @Override
+    public void registerUser(Owners owners) {
+        employeesMapper.createUser(owners);
+    }
+
 }
