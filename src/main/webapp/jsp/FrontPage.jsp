@@ -61,7 +61,7 @@
             </a>
             <dl class="layui-nav-child">
                 <dd><a href="/jsp/FrontPageLogin.jsp">登录</a></dd>
-                <dd><a href="">注册</a></dd>
+                <dd><a href="/jsp/userRegister.jsp">注册</a></dd>
             </dl>
         </c:if>
 

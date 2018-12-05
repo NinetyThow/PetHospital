@@ -42,4 +42,14 @@
     <select id="findAllSpecialties" resultType="Specialties">
         select * from specialties
     </select>
+    <select id="findOwnersByName" parameterType="String" resultType="String">
+        select o.ownerName from owners o where o.ownerName = #{ownerName}
+    </select>
+    <select id="findOwnerByPhone" parameterType="String" resultType="String">
+        select o.ownerTelephone from owners o where o.ownerTelephone = #{ownerTelephone}
+    </select>
+    <insert id="createUser" parameterType="Owners">
+        insert  into owners
+        values (default ,#{ownerName},#{ownerPassword},#{ownerAddress},#{ownerCity},#{ownerTelephone})
+    </insert>
 </mapper>

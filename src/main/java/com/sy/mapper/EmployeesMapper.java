@@ -1,9 +1,6 @@
 package com.sy.mapper;
 
-import com.sy.pojo.Employees;
-import com.sy.pojo.Specialties;
-import com.sy.pojo.VetSpecialty;
-import com.sy.pojo.Vets;
+import com.sy.pojo.*;
 
 import java.util.List;
 import java.util.Map;
@@ -35,5 +32,13 @@ public interface EmployeesMapper {
 
     //找出所有的兽医专业，供新增兽医时使用
     List<Specialties> findAllSpecialties();
+
+    //查询出所有用户信息，方便用户登录时的验证工作
+    String findOwnersByName(String ownerName);
+
+    String findOwnerByPhone(String ownerTelephone);
+
+    //用户注册
+    void createUser(Owners owners);
 
 }
