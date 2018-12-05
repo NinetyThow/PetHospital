@@ -90,4 +90,20 @@ public class EmployeesController {
         return map;
     }
 
+    //获取所有的科室
+    @RequestMapping("/GetAllSpecialty")
+//    @ResponseBody
+    public String GetAllSpecialty(ModelMap modelMap){
+        System.out.println("--------GetAllSpecialty---------");
+        List<Specialties> list = employeesBiz.queryAllSpecialties();
+        modelMap.put("specialties",list);
+
+        System.out.println("asdasf");
+        for (Specialties list1:
+                list  ) {
+            System.out.println(list1.getSpecialtyId()+"----------"+list1.getSpecialtyName());
+        }
+        return "Booking";
+    }
+
 }

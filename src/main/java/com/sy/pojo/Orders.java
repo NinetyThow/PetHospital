@@ -4,8 +4,8 @@ public class Orders {
     private int orderId;
     private Integer ownerId;
     private Owners owners;
-    private Integer petId;
-    private Pets pets;
+    private Integer specialtyId;
+    private Specialties specialtyName;
     private String orderDate;
     private String orderStatus;
 
@@ -33,20 +33,20 @@ public class Orders {
         this.owners = owners;
     }
 
-    public Integer getPetId() {
-        return petId;
+    public Integer getSpecialtyId() {
+        return specialtyId;
     }
 
-    public void setPetId(Integer petId) {
-        this.petId = petId;
+    public void setSpecialtyId(Integer specialtyId) {
+        this.specialtyId = specialtyId;
     }
 
-    public Pets getPets() {
-        return pets;
+    public Specialties getSpecialtyName() {
+        return specialtyName;
     }
 
-    public void setPets(Pets pets) {
-        this.pets = pets;
+    public void setSpecialtyName(Specialties specialtyName) {
+        this.specialtyName = specialtyName;
     }
 
     public String getOrderDate() {

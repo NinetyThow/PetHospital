@@ -81,7 +81,7 @@
 
         .item {
             /*float: left;*/
-            width: 100%;
+            width: 80%;
             height: 50px;
             margin-left: -1px;
             margin-top: -1px;
@@ -105,7 +105,84 @@
             -webkit-box-shadow: 0 0 30px rgba(0,0,0,.08);
             box-shadow: 0 0 30px rgba(0,0,0,.08);
         }
+        .classMsg-item{
+            margin: 30px 20px;
+            padding: 10px;
+        }
+        .classMsg-item h1{
+            margin-top: 20px;
+        }
+        .classMsg-item-Msg{
+            margin-top: 10px;
+        }
+        .button-bubble {
+            margin-top: 50px;
+            float: right;
+            display: block;
+            width: 240px;
+            height: 56px;
+            line-height: 56px;
+            border-radius: 28px;
+            background-size: 300% auto;
+            background-image: linear-gradient(90deg, #00ada2 0, #4dd89d 50%, #1cb19c);
+            -moz-background-image: linear-gradient(90deg, #00ada2 0, #4dd89d 50%, #1cb19c);
+            position: relative;
+        }
+        .button-bubble .button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            color: #FFFFFF;
+            font-style: normal;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+        .button-bubble .bghover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 240px;
+            height: 56px;
+            line-height: 56px;
+            border-radius: 28px;
+            background-size: 300% auto;
+            background-image: linear-gradient(90deg, #00ada2 0, #4dd89d 50%, #1cb19c);
+            -moz-background-image: linear-gradient(90deg, #00ada2 0, #4dd89d 50%, #1cb19c);
+        }
 
+        .bottom{
+            width: 100%;
+            max-width: 1480px;
+            min-width: 320px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .logo{
+            float: left;
+        }
+
+        .bottom-inner{
+            margin-top: 100px;
+        }
+
+        .Bottom-Msg{
+            padding: 30px 0 0 0;
+            width: 300px;
+            float: right;
+        }
+
+        .Bottom-Msg span {
+            display: block;
+            font-size: 18px;
+            line-height: 20px;
+            color: #333333;
+        }
+        .Bottom-Msg p{
+            margin-top: 20px;
+        }
     </style>
 
 </head>
@@ -148,13 +225,98 @@
             <div>放射科</div>
         </div>
     </div>
-        <div style="width: 1000px;height: 325px;background: #00ada2;float: left;margin-top: 30px;margin-left: 10px">
-
+        <div style="width: 1000px;height: 325px;float: left;margin-top: 30px;margin-left: 60px;border-left:5px solid green">
+            <div class="classMsg-item">
+                <h1>泌尿科</h1>
+                <div class="classMsg-item-Msg">
+                        慢性肾病是犬猫常见慢性疾病之一，据统计，超过1/3的猫和1/10的犬在它们的一生中将会患上肾脏疾病。
+                    研究表明，猫患肾脏疾病的概率可能远高于我们先前的认知，所有年龄段的猫患有肾病的概率为50%，
+                    而15岁及以上的猫咪患有慢性肾脏疾病的概率甚至高达80.9%。英国一项文献表明肾脏疾病是＞5岁猫死亡的常见原因，
+                    其中13%是因肾脏疾病死亡。安安宠医是亚太地区首批使用IDEXX SDMA诊疗宠物肾病的试点医院，将新专利抢先带给国内的患病宠物。
+                    可以在犬猫肾功能丧失25%~40%时就可以有效诊断出，能将肾病有效筛查提前48个月，早期诊断将为宠物医生提供更多的时间来处理潜在的病因或延缓疾病进程，
+                    并积非常有效地提升宠物生活质量。许多犬猫在非常早期被诊断出慢性肾病之后，依然可以高质量地、愉快地生活很多年。
+                </div>
+                <span class="button-bubble transition">
+                        <a class="button" href="/GetAllSpecialty">立即预约</a>
+                        <span class="bghover"></span>
+                </span>
+            </div>
+            <div class="classMsg-item" style="display: none">
+                <div class="classMsg-item-Msg">
+                    慢性肾病是犬猫常见慢性疾病之一，据统计，超过1/3的猫和1/10的犬在它们的一生中将会患上肾脏疾病。
+                    研究表明，猫患肾脏疾病的概率可能远高于我们先前的认知，所有年龄段的猫患有肾病的概率为50%，
+                    而15岁及以上的猫咪患有慢性肾脏疾病的概率甚至高达80.9%。英国一项文献表明肾脏疾病是＞5岁猫死亡的常见原因，
+                    其中13%是因肾脏疾病死亡。安安宠医是亚太地区首批使用IDEXX SDMA诊疗宠物肾病的试点医院，将新专利抢先带给国内的患病宠物。
+                    可以在犬猫肾功能丧失25%~40%时就可以有效诊断出，能将肾病有效筛查提前48个月，早期诊断将为宠物医生提供更多的时间来处理潜在的病因或延缓疾病进程，
+                    并积非常有效地提升宠物生活质量。许多犬猫在非常早期被诊断出慢性肾病之后，依然可以高质量地、愉快地生活很多年。
+                </div>
+                <span class="button-bubble transition">
+                        <a class="button" href="/GetAllSpecialty">立即预约</a>
+                        <span class="bghover"></span>
+                </span>
+            </div>
+            <div class="classMsg-item" style="display: none">
+                <div class="classMsg-item-Msg">
+                    慢性肾病是犬猫常见慢性疾病之一，据统计，超过1/3的猫和1/10的犬在它们的一生中将会患上肾脏疾病。
+                    研究表明，猫患肾脏疾病的概率可能远高于我们先前的认知，所有年龄段的猫患有肾病的概率为50%，
+                    而15岁及以上的猫咪患有慢性肾脏疾病的概率甚至高达80.9%。英国一项文献表明肾脏疾病是＞5岁猫死亡的常见原因，
+                    其中13%是因肾脏疾病死亡。安安宠医是亚太地区首批使用IDEXX SDMA诊疗宠物肾病的试点医院，将新专利抢先带给国内的患病宠物。
+                    可以在犬猫肾功能丧失25%~40%时就可以有效诊断出，能将肾病有效筛查提前48个月，早期诊断将为宠物医生提供更多的时间来处理潜在的病因或延缓疾病进程，
+                    并积非常有效地提升宠物生活质量。许多犬猫在非常早期被诊断出慢性肾病之后，依然可以高质量地、愉快地生活很多年。
+                </div>
+                <span class="button-bubble transition">
+                        <a class="button" href="/GetAllSpecialty">立即预约</a>
+                        <span class="bghover"></span>
+                </span>
+            </div>
+            <div class="classMsg-item" style="display: none">
+                <div class="classMsg-item-Msg">
+                    慢性肾病是犬猫常见慢性疾病之一，据统计，超过1/3的猫和1/10的犬在它们的一生中将会患上肾脏疾病。
+                    研究表明，猫患肾脏疾病的概率可能远高于我们先前的认知，所有年龄段的猫患有肾病的概率为50%，
+                    而15岁及以上的猫咪患有慢性肾脏疾病的概率甚至高达80.9%。英国一项文献表明肾脏疾病是＞5岁猫死亡的常见原因，
+                    其中13%是因肾脏疾病死亡。安安宠医是亚太地区首批使用IDEXX SDMA诊疗宠物肾病的试点医院，将新专利抢先带给国内的患病宠物。
+                    可以在犬猫肾功能丧失25%~40%时就可以有效诊断出，能将肾病有效筛查提前48个月，早期诊断将为宠物医生提供更多的时间来处理潜在的病因或延缓疾病进程，
+                    并积非常有效地提升宠物生活质量。许多犬猫在非常早期被诊断出慢性肾病之后，依然可以高质量地、愉快地生活很多年。
+                </div>
+                <span class="button-bubble transition">
+                        <a class="button" href="/GetAllSpecialty">立即预约</a>
+                        <span class="bghover"></span>
+                </span>
+            </div>
         </div>
-
-
 </div>
 
+<div style="height: 60px;width: 100%"></div>
+
+
+<div class="bottom" style="margin-top: 400px;border-left:5px solid green;float: bottom">
+    <div class="bottom-inner" style="border-bottom:2px solid green">
+        <div class="logo" style="margin-top: 30px">
+            <img src="../pic/logo.png" alt="">
+        </div>
+        <div class="Bottom-Msg">
+            <div style="width: 40px;height: 40px;display: block">
+                <img src="../pic/tell.png" alt="">
+            </div>
+            <span>联系我们</span>
+
+            <div style="margin-top: 60px">
+                <p>
+                    <span>电话：</span>
+                    <font>400-601-2291</font>
+                </p>
+                <p>
+                    <span>总机：</span>
+                    info@Odellpet.com
+                </p>
+                <p>
+                    <span>地址：</span>
+                    苏州工业园区腾飞创新园
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

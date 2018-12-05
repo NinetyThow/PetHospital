@@ -41,6 +41,7 @@
         <%--</dl>--%>
     </li>
     <li class="layui-nav-item"><a href="/jsp/OnlineBooking.jsp">诊疗服务</a></li>
+    <li class="layui-nav-item"><a href="/GetAllSpecialty">网上预约</a></li>
     <li class="layui-nav-item">
         <a href="javascript:;">信息管理</a>
         <dl class="layui-nav-child">

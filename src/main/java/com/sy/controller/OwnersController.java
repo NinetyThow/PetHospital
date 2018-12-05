@@ -1,8 +1,10 @@
 package com.sy.controller;
 
+import com.sy.biz.EmployeesBiz;
 import com.sy.biz.IOwnersBiz;
 import com.sy.pojo.Owners;
 import com.sy.pojo.PageBean;
+import com.sy.pojo.Specialties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,13 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class OwnersController {
     @Autowired
     private IOwnersBiz ownersBiz;
+
+
 
     //查询所有主人信息
     @RequestMapping("/AllOwners")
@@ -84,7 +90,6 @@ public class OwnersController {
 //        System.out.println(petsId);
         int petsId = Integer.parseInt(request.getParameter("petsId"));
         System.out.println(petsId);
-
         Owners owners= ownersBiz.CheckOwnersMsgByPetsId(petsId);
 //        System.out.println(owners.getOwnerName()+"---"+owners.getOwnerCity());
         return owners;
@@ -95,4 +100,6 @@ public class OwnersController {
         ownersBiz.CreateOwner(owners);
         return "redirect:/AllOwners?pageCode=1";
     }
+
+
 }

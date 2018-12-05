@@ -32,6 +32,7 @@ public interface EmployeesMapper {
     //查询被选中兽医的详情页面
     Vets findVetInfoByVetId(int vetId);
 
+
     //找出所有的兽医专业，供新增兽医时使用
     List<Specialties> findAllSpecialties();
 
