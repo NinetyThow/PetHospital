@@ -10,68 +10,60 @@
 <html>
 <head>
     <title>Title</title>
+    <meta charset="UTF-8">
     <script src="../js/jquery.js" charset="utf-8"></script>
 </head>
 <body>
 <%@ include file="welcome.jsp" %>
-<table class="layui-hide" id="test" lay-filter="test"></table>
+<div style="width: 600px">
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        <button class="layui-btn layui-btn-sm" id="All">获取全部数据</button>
+        <button class="layui-btn layui-btn-sm" id="isCheck">获取未审核数据</button>
+        <button class="layui-btn layui-btn-sm" id="notCheck">获取已审核数据</button>
     </div>
 </script>
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
-<script>
-    layui.use('table', function(){
-        var table = layui.table;
 
+<script>
+    var orderStatus;
+    $("#All").click(function () {
+        orderStatus='';
+    });
+
+    $("#isCheck").click(function () {
+        orderStatus='已审核';
+    });
+
+
+
+    layui.use('table', function () {
+        var table = layui.table;
+        $("#notCheck").click(function () {
+            orderStatus='待审核';
+        });
         table.render({
             elem: '#test'
-            ,url:'/getOrders'
-            ,toolbar: '#toolbarDemo'
-            ,title: '用户数据表'
-            ,totalRow: true
-            ,cols: [[
-                {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
-                ,{field:'username', title:'用户名', width:120, edit: 'text'}
-                ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
-                        return '<em>'+ res.email +'</em>'
-                    }}
-                ,{field:'experience', title:'积分', width:80, sort: true, totalRow: true}
-                ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
-                ,{field:'logins', title:'登入次数', width:100, sort: true, totalRow: true}
-                ,{field:'sign', title:'签名'}
-                ,{field:'city', title:'城市', width:100}
-                ,{field:'ip', title:'IP', width:120}
-                ,{field:'joinTime', title:'加入时间', width:120}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+            , url: '/getOrders?orderStatus=待审核'
+            , toolbar: '#toolbarDemo'
+            , title: '用户数据表'
+            , totalRow: true
+            , cols: [[
+                {field: 'orderId', title: 'ID', width: 120, fixed: 'left', unresize: true, sort: true}
+                , {field: 'ownerName', title: '主人名称', width: 120, templet: '<div>{{d.owners.ownerName}}</div>'}
+                , {field: 'orderDate', title: '预约时间', width: 120, sort: true}
+                , {
+                    field: 'specialtyName',
+                    title: '科室名称',
+                    width: 120,
+                    sort: true,
+                    templet: '<div>{{d.specialties.specialtyName}}</div>'
+                }
+                , {field: 'orderStatus', title: '预约状态', width: 120, sort: true}
             ]]
-            ,page: true
-        });
-
-        //工具栏事件
-        table.on('toolbar(test)', function(obj){
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch(obj.event){
-                case 'getCheckData':
-                    var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：'+ data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选': '未全选')
-                    break;
-            };
+            , page: true
         });
     });
 </script>

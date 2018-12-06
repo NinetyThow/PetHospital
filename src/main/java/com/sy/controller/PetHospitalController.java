@@ -108,33 +108,37 @@ public class PetHospitalController {
         return "findVisits";
     }
 
-    @RequestMapping(value = "/frontLogin", method=RequestMethod.POST)
+    @RequestMapping(value = "/frontLogin", method = RequestMethod.POST)
     @ResponseBody
-    public Map frontLogin(@RequestBody String LoginInfo){
-        Map<String,Owners> map=new HashMap<>();
+    public Map frontLogin(@RequestBody String LoginInfo) {
+        Map<String, Owners> map = new HashMap<>();
         Owners owners = petHospitalBizImpl.searchOwnerInfoByNameOrPhone(LoginInfo);
-        map.put("owner",owners);
+        map.put("owner", owners);
         return map;
     }
 
     @RequestMapping("/session")
-    public  String loginSession(HttpSession session,String username,String password,String userPhone){
-        session.setAttribute("frontUsername",username);
-        session.setAttribute("frontPassword",password);
-        session.setAttribute("frontPhone",userPhone);
+    public String loginSession(HttpSession session, String username, String password, String userPhone) {
+        session.setAttribute("frontUsername", username);
+        session.setAttribute("frontPassword", password);
+        session.setAttribute("frontPhone", userPhone);
         return "FrontPage";
     }
 
     @RequestMapping("/removeSession")
-    public  String removeSession(HttpSession session){
+    public String removeSession(HttpSession session) {
         session.invalidate();
         return "FrontPage";
     }
 
-    @RequestMapping(value = "/getOrders", method=RequestMethod.GET)
-    @ResponseBody
-    public List frontLogin(String orderStatus,String condition){
-        return petHospitalBizImpl.searchOrders(orderStatus,condition);
+    @RequestMapping(value = "/getOrders", method = RequestMethod.GET)
+    public Map frontLogin(String orderStatus, String condition) {
+        System.out.println(orderStatus);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        List<Orders> ordersList = petHospitalBizImpl.searchOrders(orderStatus, condition);
+        map.put("data", ordersList);
+        return map;
     }
 
 }

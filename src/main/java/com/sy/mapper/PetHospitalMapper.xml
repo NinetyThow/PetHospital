@@ -134,6 +134,7 @@
         from orders o
         inner join owners o2 on o.ownerId = o2.ownerId
         inner join vets v on o.vetId = v.vetId
+        inner join specialties s on o.specialtyId = s.specialtyId
         where
         <if test="orderStatus == null">
             o.orderStatus =#{orderStatus}
@@ -155,6 +156,9 @@
         </association>
         <association property="vets" javaType="Vets" autoMapping="true">
             <id property="vetId" column="vetId"/>
+        </association>
+        <association property="specialties" javaType="com.sy.pojo.Specialties" autoMapping="true">
+            <id property="specialtyId" column="specialtyId"/>
         </association>
     </resultMap>
 </mapper>
