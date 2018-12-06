@@ -90,6 +90,34 @@ public class EmployeesController {
         return map;
     }
 
+    //查询用户名是否已被注册
+    @RequestMapping(value = "/findAllUsers",method = RequestMethod.POST)
+    @ResponseBody
+    public Map findAllUsers(String ownerName) throws Exception{
+        String owners = employeesBiz.queryOwnersByName(ownerName);
+        Map <String,String> map = new HashMap<>();
+        map.put("owners",owners);
+        return map;
+    }
+    //查询手机号是否已被注册
+    @RequestMapping(value = "/findOwnerPhone",method = RequestMethod.POST)
+    @ResponseBody
+    public Map findOwnerPhone(String ownerTelephone) throws Exception{
+        String ownerPhone = employeesBiz.queryOwnerByPhone(ownerTelephone);
+        Map <String,String> map = new HashMap<>();
+        map.put("ownerPhone",ownerPhone);
+        return map;
+    }
+    //用户注册
+    @RequestMapping("/registerUser")
+    public String registerUser(Owners owners,HttpSession session) throws Exception{
+        employeesBiz.registerUser(owners);
+        session.setAttribute("frontUsername",owners.getOwnerName());
+        session.setAttribute("frontPassword",owners.getOwnerPassword());
+        session.setAttribute("frontPhone",owners.getOwnerTelephone());
+        return "FrontPage";
+    }
+
     //获取所有的科室
     @RequestMapping("/GetAllSpecialty")
 //    @ResponseBody

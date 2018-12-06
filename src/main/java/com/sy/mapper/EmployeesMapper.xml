@@ -52,4 +52,7 @@
         insert  into owners
         values (default ,#{ownerName},#{ownerPassword},#{ownerAddress},#{ownerCity},#{ownerTelephone})
     </insert>
+    <select id="findOldPasswordByOwnerTelephone" parameterType="String" resultType="String">
+        select o.ownerPassword from owners o where o.ownerTelephone = #{ownerTelephone}
+    </select>
 </mapper>
