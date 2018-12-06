@@ -1,5 +1,6 @@
 package com.sy.mapper;
 
+import com.sy.pojo.Orders;
 import com.sy.pojo.Owners;
 
 import java.util.List;
@@ -22,4 +23,13 @@ public interface ownersMapper {
     void UpdateOwners(Owners owners);
 
     void CreateOwner(Owners owners);
+
+    int findIdByPhone(String ownerPhone);
+
+    void CreateOrders(Orders orders);
+
+    Owners findOwnerMsgByPhone(String phone);
+
+    void UpdateOwnerMsgByPhone(Owners owners);
+
 }

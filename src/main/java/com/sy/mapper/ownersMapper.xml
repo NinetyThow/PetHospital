@@ -68,4 +68,28 @@
                 or ownerCity like '%${ownerId}%'
     </select>
 
+    <!--前台页面更改信息-->
+    <!--通过手机号查找主人ID-->
+    <select id="findIdByPhone" parameterType="String" resultType="int">
+        select ownerId from owners where ownerTelephone=#{ownerTelephone}
+    </select>
+
+    <!--新增预定信息-->
+    <insert id="CreateOrders" parameterType="Orders">
+        insert into orders(ownerId,orderDate,orderStatus,specialtyId,vetId) values ( #{ownerId},#{orderDate},'待审核',#{specialtyId},'1')
+    </insert>
+
+    <!--通过手机号查询主人自身所有的信息，用于修改信息-->
+    <select id="findOwnerMsgByPhone" parameterType="String" resultType="Owners">
+        select * from owners where ownerTelephone =#{ownerTelephone}
+    </select>
+
+    <update id="UpdateOwnerMsgByPhone" parameterType="Owners">
+        update owners set
+                          ownerName = #{ownerName},
+                          ownerCity = #{ownerCity},
+                          ownerAddress = #{ownerAddress}
+        where ownerTelephone = #{ownerTelephone}
+    </update>
+
 </mapper>

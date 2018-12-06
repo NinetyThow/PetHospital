@@ -2,6 +2,7 @@ package com.sy.controller;
 
 import com.sy.biz.EmployeesBiz;
 import com.sy.biz.IOwnersBiz;
+import com.sy.pojo.Orders;
 import com.sy.pojo.Owners;
 import com.sy.pojo.PageBean;
 import com.sy.pojo.Specialties;
@@ -101,5 +102,26 @@ public class OwnersController {
         return "redirect:/AllOwners?pageCode=1";
     }
 
+    //新增预定信息
+    @RequestMapping("/CreateOrders")
+    public String CreateOrders(HttpServletRequest request){
+            Orders orders = new Orders();
+            String phone = request.getParameter("orderPhone");
+            int ownerId = ownersBiz.findIdByPhone(phone);
+            orders.setOwnerId(ownerId);
+            orders.setOrderDate(request.getParameter("orderDate"));
+            orders.setSpecialtyId(Integer.parseInt(request.getParameter("specialtyId")));
+        System.out.println(request.getParameter("specialtyId"));
+         ownersBiz.CreateOrders(orders);
+         return "Booking";
+    }
 
+    @RequestMapping("/UpdateMsgBySelf")
+    public String UpdateMsgBySelf(String frontPhone,ModelMap modelMap){
+        System.out.println("-------UpdateMsgBySelf--------");
+        System.out.println(frontPhone);
+        Owners owners = ownersBiz.findOwnerMsgByPhone(frontPhone);
+        modelMap.put("owners",owners);
+        return "OwnersMsgModify";
+    }
 }

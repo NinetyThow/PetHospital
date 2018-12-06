@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<%@ include file="welcome.jsp" %>
+<%@ include file="FrontPage.jsp" %>
 
 <div style="width: 310px;margin: 0 auto;top: 500px;">
     <div style="height: 100px;text-align: center;font-size: 25px;line-height: 100px">欢 &nbsp;迎  &nbsp;登  &nbsp;录</div>

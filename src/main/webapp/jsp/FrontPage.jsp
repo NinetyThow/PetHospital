@@ -35,22 +35,18 @@
     <li class="layui-nav-item"><a href="/jsp/MainPage.jsp">医院首页</a></li>
     <li class="layui-nav-item">
         <a href="/jsp/AboutUs.jsp">关于我们</a>
-        <%--<dl class="layui-nav-child">--%>
-            <%--<dd><a href="${pageContext.request.contextPath}/queryVets">查看医师</a></dd>--%>
-            <%--<dd><a href="${pageContext.request.contextPath}/findAllSpecialty">新增医师</a></dd>--%>
-        <%--</dl>--%>
     </li>
     <li class="layui-nav-item"><a href="/jsp/OnlineBooking.jsp">诊疗服务</a></li>
     <li class="layui-nav-item"><a href="/GetAllSpecialty">网上预约</a></li>
     <li class="layui-nav-item">
-        <a href="javascript:;">信息管理</a>
+        <a href="javascript:;">个人中心</a>
         <dl class="layui-nav-child">
-            <dd><a href="<c:url value="/jsp/Owners.jsp"/>">添加客户</a></dd>
-            <dd><a href="/AllOwners">修改客户</a></dd>
+            <dd><a href="/UpdateMsgBySelf?frontPhone=18112760309">固定信息修改</a></dd>
+            <dd><a href="/UpdateMsgBySelf?frontPhone=${sessionScope.frontPhone}">session信息修改</a></dd>
+            <dd><a href="/AllOwners">密码修改</a></dd>
             <dd><a href="/insertPetJsp">添加宠物</a></dd>
             <dd><a href="/updatePetJsp">修改宠物</a></dd>
             <dd><a href="/findVisitsJsp">查看就医记录</a></dd>
-            <dd><a href="/insertVisitJsp">新增就医记录</a></dd>
         </dl>
     </li>
 

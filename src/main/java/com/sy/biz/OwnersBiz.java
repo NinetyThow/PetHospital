@@ -1,6 +1,7 @@
 package com.sy.biz;
 
 import com.sy.mapper.ownersMapper;
+import com.sy.pojo.Orders;
 import com.sy.pojo.Owners;
 import com.sy.pojo.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,26 @@ public class OwnersBiz implements IOwnersBiz{
         ownersMapper.CreateOwner(owners);
     }
 
+    @Override
+    public int findIdByPhone(String ownerPhone) {
+        return ownersMapper.findIdByPhone(ownerPhone);
+    }
+
+    @Transactional(readOnly=false)
+    @Override
+    public void CreateOrders(Orders orders) {
+        ownersMapper.CreateOrders(orders);
+    }
+
+    @Override
+    public Owners findOwnerMsgByPhone(String phone) {
+        return ownersMapper.findOwnerMsgByPhone(phone);
+    }
+
+    @Transactional(readOnly=false)
+    @Override
+    public void UpdateOwnerMsgByPhone(Owners owners) {
+        ownersMapper.UpdateOwnerMsgByPhone(owners);
+    }
 
 }

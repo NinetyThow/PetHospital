@@ -1,16 +1,11 @@
-<%@ page import="com.sy.pojo.Specialties" %>
-<%@ page import="com.sy.controller.OwnersController" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="com.sy.controller.EmployeesController" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/12/5 0005
-  Time: 14:46
+  Date: 2018/12/6 0006
+  Time: 14:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -18,7 +13,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="../layui/css/layui.css" type="text/css" rel="stylesheet" media="all"/>
+    <link href="../layui/css/layui.css" type="text/css" rel="stylesheet"  media="all"/>
 
     <style>
         .ny-tab{
@@ -56,50 +51,48 @@
             font-family:"微软雅黑";
         }
     </style>
+
 </head>
 <body>
 
-
 <jsp:include page="FrontPage.jsp"/>
-<div style="background-image: url(/pic/story_banner.jpg) ; height: 600px;width: 1920px"></div>
+<div style="background-image: url(/pic/talent_banner.jpg) ; height: 600px;width: 1920px"></div>
 
 <div class="ny-tab">
     <div class="inner-wrap">
         <div class="content b-shadow clearfix">
-            <p class="Msg">网上预约</p>
+            <p class="Msg">信息修改</p>
         </div>
     </div>
 </div>
 
 <div style="width:400px;align-content: center;margin: 30px auto">
-    <form class="layui-form layui-form-pane" action="/CreateOrders" method="post">
+    <form class="layui-form layui-form-pane" action="/CreateOwner" method="post">
         <div class="layui-form-item">
-            <label class="layui-form-label">手机号</label>
+        <label class="layui-form-label">手机</label>
             <div class="layui-input-inline">
-                <input type="text" name="orderPhone" lay-verify="required" placeholder="必填项" autocomplete="off" class="layui-input" id="name">
+                <input type="text" name="ownerTelephone" lay-verify="required" placeholder="必填项" autocomplete="off" class="layui-input" id="phone" readonly="readonly" value="${owners.ownerTelephone}" >
+                <%--<p style="color:red;display: none" id="Msg" >手机号码有误，请重填</p>--%>
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">科室</label>
+            <label class="layui-form-label">用户名</label>
             <div class="layui-input-inline">
-                <select style="height: 32px;width: 150px;float: left" name="specialtyId">
-
-                    <option >--选择科室--</option>
-                    <!--<option value="1">教学</option>-->
-
-                    <c:forEach var="Specialties" items="${specialties}">
-                    <option name="specialty" value=${Specialties.specialtyId}> ${Specialties.specialtyName}</option>
-                    </c:forEach>
-
-                </select>
+                <input type="text" name="ownerName" lay-verify="required" placeholder="必填项" autocomplete="off" class="layui-input" id="name" value="${owners.ownerName}">
             </div>
         </div>
 
-        <div class="layui-inline">
-            <label class="layui-form-label">预约日期</label>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址</label>
             <div class="layui-input-inline">
-                <input type="text" name="orderDate" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                <input type="text" name="ownerAddress" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="${owners.ownerAddress}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">城市</label>
+            <div class="layui-input-inline">
+                <input type="text" name="ownerCity" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="${owners.ownerCity}">
             </div>
         </div>
 
@@ -110,19 +103,6 @@
     </form>
 </div>
 
-
-<script>
-    layui.use(['form', 'layedit', 'laydate'], function () {
-        var laydate = layui.laydate;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-    });
-</script>
 
 
 </body>

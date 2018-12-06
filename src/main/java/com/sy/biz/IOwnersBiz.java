@@ -1,5 +1,6 @@
 package com.sy.biz;
 
+import com.sy.pojo.Orders;
 import com.sy.pojo.Owners;
 import com.sy.pojo.PageBean;
 
@@ -23,4 +24,16 @@ public interface IOwnersBiz {
 
    //新增主人信息
    public void CreateOwner(Owners owners);
+
+   //根据手机号查主人ID
+   public int findIdByPhone(String ownerPhone);
+
+   //新增预定信息
+   public void CreateOrders(Orders orders);
+
+   //通过手机号查询主人自身所有的信息，用于修改信息
+   public Owners findOwnerMsgByPhone(String phone);
+
+   //主人自身修改信息
+   public void UpdateOwnerMsgByPhone(Owners owners);
 }

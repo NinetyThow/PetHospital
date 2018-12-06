@@ -122,7 +122,7 @@ public class PetHospitalController {
         session.setAttribute("frontUsername", username);
         session.setAttribute("frontPassword", password);
         session.setAttribute("frontPhone", userPhone);
-        return "FrontPage";
+        return "MainPage";
     }
 
     @RequestMapping("/removeSession")
