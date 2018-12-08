@@ -3,6 +3,7 @@ package com.sy.biz;
 import com.sy.pojo.Orders;
 import com.sy.pojo.Owners;
 import com.sy.pojo.PageBean;
+import com.sy.pojo.Pets;
 
 import java.util.List;
 
@@ -36,4 +37,7 @@ public interface IOwnersBiz {
 
    //主人自身修改信息
    public void UpdateOwnerMsgByPhone(Owners owners);
+
+//   //根据主人的ID查询宠物的信息  主人ID通过 phone获取
+//    public PageBean findPetMsgByOwner(int pageSize, int pageCode, String phone);
 }

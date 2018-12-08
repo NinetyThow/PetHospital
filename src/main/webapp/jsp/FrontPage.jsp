@@ -41,12 +41,10 @@
     <li class="layui-nav-item">
         <a href="javascript:;">个人中心</a>
         <dl class="layui-nav-child">
-            <dd><a href="/UpdateMsgBySelf?frontPhone=18112760309">固定信息修改</a></dd>
-            <dd><a href="/UpdateMsgBySelf?frontPhone=${sessionScope.frontPhone}">session信息修改</a></dd>
+            <dd><a href="/UpdateMsgBySelf?frontPhone=${sessionScope.frontPhone}">信息修改</a></dd>
             <dd><a href="/AllOwners">密码修改</a></dd>
-            <dd><a href="/insertPetJsp">添加宠物</a></dd>
-            <dd><a href="/updatePetJsp">修改宠物</a></dd>
-            <dd><a href="/findVisitsJsp">查看就医记录</a></dd>
+            <%--<dd><a href="/findMyPets?frontPhone=${sessionScope.frontPhone}">宠物管理</a></dd>--%>
+            <%--<dd><a href="/findVisitsJsp">查看就医记录</a></dd>--%>
         </dl>
     </li>
 

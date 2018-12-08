@@ -35,7 +35,6 @@
     </resultMap>
 
     <!--更新宠物主人的信息-->
-
     <update id="UpdateOwners" parameterType="Owners">
        update owners set ownerName = #{ownerName},ownerAddress = #{ownerAddress},ownerCity = #{ownerCity},ownerTelephone = #{ownerTelephone}
         where ownerId = #{ownerId}
@@ -91,5 +90,20 @@
                           ownerAddress = #{ownerAddress}
         where ownerTelephone = #{ownerTelephone}
     </update>
+
+    <!--&lt;!&ndash;根据主人的ID查询宠物的信息&ndash;&gt;-->
+
+    <!--<select id="findAllOwnersPets" resultType="int">-->
+        <!--select * from pets where ownerId = #{ownerId}-->
+    <!--</select>-->
+
+    <!--<select id="findPetMsgByOwner" parameterType="Map" resultType="Pets" >-->
+        <!--select * from pets where ownerId=#{ownerId} limit ${(pageCode-1)*pageSize},${pageSize}-->
+    <!--</select>-->
+
+    <!--<select id="findPetsType" parameterType="int" resultType="String">-->
+        <!--select typeName from types where typeId=#{typeId}-->
+    <!--</select>-->
+
 
 </mapper>

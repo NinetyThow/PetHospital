@@ -24,8 +24,6 @@ public class OwnersController {
     @Autowired
     private IOwnersBiz ownersBiz;
 
-
-
     //查询所有主人信息
     @RequestMapping("/AllOwners")
     public String AllOwners(@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
@@ -38,7 +36,6 @@ public class OwnersController {
     //模糊查询主人信息
     @RequestMapping("/AllOwnersLike")
     public String AllOwnersLike(String ownerId,@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
-        System.out.println(ownerId);
        PageBean pb = ownersBiz.findOwnersLike(5,pageCode,ownerId);
        modelMap.put("pageBean",pb);
        modelMap.put("ownerId",ownerId);
@@ -118,10 +115,27 @@ public class OwnersController {
 
     @RequestMapping("/UpdateMsgBySelf")
     public String UpdateMsgBySelf(String frontPhone,ModelMap modelMap){
-        System.out.println("-------UpdateMsgBySelf--------");
-        System.out.println(frontPhone);
         Owners owners = ownersBiz.findOwnerMsgByPhone(frontPhone);
         modelMap.put("owners",owners);
         return "OwnersMsgModify";
     }
+
+    //用户自身修改信息
+    @RequestMapping("/UpdateBySelf")
+    public String UpdateOwnerMsgByPhone(Owners owners){
+        ownersBiz.UpdateOwnerMsgByPhone(owners);
+        return "AboutUs";
+    }
+
+//    //用户查看自己宠物的信息
+//    @RequestMapping("/findMyPets")
+//    public String findMyPets(String frontPhone,@RequestParam(defaultValue = "1")int pageCode, ModelMap modelMap){
+//
+//        System.out.println(frontPhone);
+//        PageBean pb = ownersBiz.findPetMsgByOwner(2,pageCode,frontPhone);
+//        modelMap.put("pageBean",pb);
+//        modelMap.put("ownerId",frontPhone);
+//
+//        return "PetsEdit";
+//    }
 }

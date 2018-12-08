@@ -21,22 +21,20 @@
     <link href="../layui/css/layui.css" type="text/css" rel="stylesheet" media="all"/>
 
     <style>
-        .ny-tab {
-            position: relative;
-            z-index: 1;
-            max-width: 740px;
+        .ny-tab{
+            position:relative;
+            z-index:1;
+            max-width:740px;
             margin: 0 auto;
         }
-
-        .inner-wrap {
+        .inner-wrap{
             width: 100%;
             max-width: 1480px;
             min-width: 320px;
             margin: 0 auto;
             padding: 0 40px;
         }
-
-        .ny-tab .content {
+        .ny-tab .content{
             height: 60px;
             max-width: 660px;
             margin: 0 auto;
@@ -45,18 +43,17 @@
             border-radius: 29px;
             text-align: center;
             overflow: hidden;
-            text-shadow: 1px 2px 6px #000;
+            text-shadow:1px 2px 6px #000;
             box-shadow: 10px 5px 2px #888888;
         }
-
-        .Msg {
+        .Msg{
             text-align: center;
             border-left: 2px solid #eeeeee;
             height: 58px;
             line-height: 58px;
-            font-size: 200%;
+            font-size:200%;
             /*font-weight: bold;*/
-            font-family: "微软雅黑";
+            font-family:"微软雅黑";
         }
     </style>
 </head>
@@ -79,8 +76,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-inline">
-                <input type="text" name="orderPhone" lay-verify="required" placeholder="必填项"
-                       value="${sessionScope.frontPhone}" autocomplete="off" class="layui-input" id="name">
+                <input type="text" name="orderPhone" lay-verify="required" placeholder="必填项" autocomplete="off" class="layui-input" id="name" value="${sessionScope.frontPhone}">
             </div>
         </div>
 
@@ -88,19 +84,13 @@
             <label class="layui-form-label">科室</label>
             <div class="layui-input-inline">
                 <select style="height: 32px;width: 150px;float: left" name="specialtyId">
-                    <option>--选择科室--</option>
-                    <c:forEach var="Specialties" items="${specialties}">
-                        <option name="specialty" value=${Specialties.specialtyId}> ${Specialties.specialtyName}</option>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">医师</label>
-            <div class="layui-input-inline">
-                <select style="height: 32px;width: 150px;float: left" name="specialtyId">
-                    <option>--选择科室--</option>
+                    <option >--选择科室--</option>
+                    <!--<option value="1">教学</option>-->
+
+                    <c:forEach var="Specialties" items="${specialties}">
+                    <option name="specialty" value=${Specialties.specialtyId}> ${Specialties.specialtyName}</option>
+                    </c:forEach>
 
                 </select>
             </div>
@@ -109,13 +99,12 @@
         <div class="layui-inline">
             <label class="layui-form-label">预约日期</label>
             <div class="layui-input-inline">
-                <input type="text" name="orderDate" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
-                       autocomplete="off" class="layui-input">
+                <input type="text" name="orderDate" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item" style="text-align: center">
-            <button class="layui-btn" lay-submit="" lay-filter="demo2" onclick="checkMsg()">提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="demo2" id="submit">提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </form>
@@ -133,6 +122,11 @@
             elem: '#date1'
         });
     });
+
+    $("#submit").click(function() {
+        alert("预约成功！")
+    })
+
 </script>
 
 

@@ -4,6 +4,7 @@ import com.sy.mapper.ownersMapper;
 import com.sy.pojo.Orders;
 import com.sy.pojo.Owners;
 import com.sy.pojo.PageBean;
+import com.sy.pojo.Pets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,5 +110,31 @@ public class OwnersBiz implements IOwnersBiz{
     public void UpdateOwnerMsgByPhone(Owners owners) {
         ownersMapper.UpdateOwnerMsgByPhone(owners);
     }
+
+
+//    @Override
+//    public PageBean findPetMsgByOwner(int pageSize, int pageCode, String phone) {
+//        PageBean pb = new PageBean();
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("pageSize", pageSize);
+//        map.put("pageCode", pageCode);
+//
+//        int ownerId =ownersMapper.findIdByPhone(phone);
+//        map.put("ownerId",ownerId);
+//
+//        int allCount = ownersMapper.findAllOwnersPets(ownerId);
+//        pb.setAllCount(allCount);
+//        pb.setPageSize(pageSize);
+//
+//        if(pageCode > pb.getAllPages()) {
+//            pageCode = pb.getAllPages();
+//        }
+//        pb.setPageCode(pageCode);
+//
+//        List<Pets> pets = ownersMapper.findPetMsgByOwner(map);
+//        pb.setDatas(pets);
+//        return pb;
+//
+//    }
 
 }

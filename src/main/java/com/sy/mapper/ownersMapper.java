@@ -2,6 +2,7 @@ package com.sy.mapper;
 
 import com.sy.pojo.Orders;
 import com.sy.pojo.Owners;
+import com.sy.pojo.Pets;
 
 import java.util.List;
 import java.util.Map;
@@ -31,5 +32,11 @@ public interface ownersMapper {
     Owners findOwnerMsgByPhone(String phone);
 
     void UpdateOwnerMsgByPhone(Owners owners);
+
+//    List<Pets> findPetMsgByOwner(Map<String, Object> map);
+//
+//    int findAllOwnersPets(int ownerId);
+//
+//    String findPetsType(int typeId);
 
 }
