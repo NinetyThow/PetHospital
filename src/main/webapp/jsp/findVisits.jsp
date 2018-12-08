@@ -58,7 +58,6 @@
                 <th style="text-align: center">宠物名称</th>
                 <th style="text-align: center">宠物医师</th>
                 <th style="text-align: center">就医时间</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -68,11 +67,6 @@
                     <td style="text-align: center">${visit.pets.petName}</td>
                     <td style="text-align: center">${visit.vets.vetName}</td>
                     <td style="text-align: center">${visit.visitDate}</td>
-                    <td style="text-align: center">
-                        <a >
-                        <button class="layui-btn layui-btn-primary">查看详情</button>
-                        </a>
-                    </td>
                 </tr>
             </c:forEach>
             </tbody>

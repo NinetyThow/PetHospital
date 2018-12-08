@@ -87,7 +87,12 @@
             </div>
         </div>
 
-        <input type="file" value="上传头像" name="file1">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 150px">宠物照片</label>
+            <div class="layui-input-inline">
+                <input type="file" value="上传头像" name="file1" style="height: 30px;line-height: 30px">
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <div class="layui-input-block" style="padding-left: 50px">
