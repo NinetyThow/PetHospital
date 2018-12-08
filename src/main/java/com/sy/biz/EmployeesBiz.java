@@ -25,4 +25,8 @@ public interface EmployeesBiz {
     String queryOwnerByPhone(String ownerTelephone);
 
     void registerUser(Owners owners);
+
+    String queryOldPasswordByOwnerTelephone(String ownerTelephone);
+
+    void changePasswordByOwnerTelephone(Owners owner);
 }

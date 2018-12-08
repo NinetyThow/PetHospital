@@ -117,6 +117,20 @@ public class EmployeesController {
         session.setAttribute("frontPhone",owners.getOwnerTelephone());
         return "FrontPage";
     }
+    //通过手机验证，跳转到修改密码界面
+    @RequestMapping("/toChangePassword")
+    public String toChangePassword(String ownerTelephone,ModelMap model) throws Exception{
+        String oldPass = employeesBiz.queryOldPasswordByOwnerTelephone(ownerTelephone);
+        model.put("oldPass",oldPass);
+        model.put("ownerTelephone",ownerTelephone);
+        return "resetPassword";
+    }
+    //修改密码
+    @RequestMapping("/changePassword")
+    public String changePassword(Owners owner) throws Exception{
+        employeesBiz.changePasswordByOwnerTelephone(owner);
+        return "FrontPageLogin";
+    }
 
     //获取所有的科室
     @RequestMapping("/GetAllSpecialty")

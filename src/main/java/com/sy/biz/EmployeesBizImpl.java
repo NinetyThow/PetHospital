@@ -99,4 +99,15 @@ public class EmployeesBizImpl implements EmployeesBiz {
         employeesMapper.createUser(owners);
     }
 
+    @Override
+    public String queryOldPasswordByOwnerTelephone(String ownerTelephone) {
+        return employeesMapper.findOldPasswordByOwnerTelephone(ownerTelephone);
+    }
+
+    @Transactional(readOnly=false)
+    @Override
+    public void changePasswordByOwnerTelephone(Owners owner) {
+        employeesMapper.updatePasswordByOwnerTelephone(owner);
+    }
+
 }

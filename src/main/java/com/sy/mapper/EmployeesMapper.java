@@ -44,4 +44,7 @@ public interface EmployeesMapper {
     //根据手机号查询用户旧密码
     String findOldPasswordByOwnerTelephone(String ownerTelephone);
 
+    //根据手机号码替换用户密码
+    void updatePasswordByOwnerTelephone(Owners owner);
+
 }

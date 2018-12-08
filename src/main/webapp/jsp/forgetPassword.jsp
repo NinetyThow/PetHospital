@@ -12,31 +12,34 @@
 </head>
 <body>
 <%@ include file="FrontPage.jsp" %>
-<div style="margin: 0px auto;width: 600px;height: 400px;">
-    <h1 style="text-align: center;height: 100px;line-height: 100px">找回密码</h1>
-    <form class="layui-form" method="post" action="">
-        <div class="layui-form-item">
-            <label class="layui-form-label">手机号</label>
-            <div class="layui-input-inline">
-                <input type="text" id="ownerTelephone" name="ownerTelephone" required  lay-verify="required" placeholder="请输入注册时的手机号" autocomplete="off" class="layui-input">
+<div style="background: url('/pic/Owner.jpg') no-repeat;background-size: cover;height: 800px;">
+    <div style="margin: 0px auto;width: 600px;height: 400px;">
+        <h1 style="text-align: center;height: 100px;line-height: 100px">找回密码</h1>
+        <form class="layui-form" method="post" action="/toChangePassword">
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="ownerTelephone" name="ownerTelephone" required  lay-verify="required" placeholder="请输入注册时的手机号" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux" id="phoneTip"></div>
             </div>
-            <div class="layui-form-mid layui-word-aux" id="phoneTip"></div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">验证码</label>
-            <div class="layui-input-inline">
-                <input id="writeMsg" type="text" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+            <div class="layui-form-item">
+                <label class="layui-form-label">验证码</label>
+                <div class="layui-input-inline">
+                    <input id="writeMsg" type="text" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                </div>
+                <button class="layui-btn" id="sendMsg" onclick="settime(this)" type="button">发送验证码</button>
             </div>
-            <button class="layui-btn" id="sendMsg" onclick="settime(this)" type="button">发送验证码</button>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button id="submit" class="layui-btn" lay-submit>下一步</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="submit" class="layui-btn" lay-submit>下一步</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+
 <script>
     var originTime = 60;
     function settime(obj) {

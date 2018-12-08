@@ -35,7 +35,7 @@
                 <div class="layui-input-inline">
                     <input type="password" id="pass" name="ownerPassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">密码必须6到12位，且不能出现空格</div>
+                <div class="layui-form-mid layui-word-aux" id="passwordTip">密码必须6到12位，且不能出现空格</div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">确认密码</label>
@@ -146,6 +146,16 @@
                     }
                 }
             )
+        });
+        var patten_pass = /^[0-9a-zA-Z]{6,12}$/;
+        $("#pass").blur(function () {
+            var matchResult = patten_pass.test($("#pass").val());
+            if(!matchResult){
+                $("#passwordTip").html("密码不符合格式，请重写");
+                $("#pass").val("")
+            }else {
+                $("#passwordTip").html("可以使用该密码")
+            }
         });
         $("#passAgain").blur(function () {
             if($("#passAgain").val() !== $("#pass").val() || $("#passAgain").val() === ""){

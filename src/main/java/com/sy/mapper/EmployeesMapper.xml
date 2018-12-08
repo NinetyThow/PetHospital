@@ -55,4 +55,7 @@
     <select id="findOldPasswordByOwnerTelephone" parameterType="String" resultType="String">
         select o.ownerPassword from owners o where o.ownerTelephone = #{ownerTelephone}
     </select>
+    <update id="updatePasswordByOwnerTelephone" parameterType="Owners">
+        update owners o set o.ownerPassword = #{ownerPassword} where o.ownerTelephone = #{ownerTelephone}
+    </update>
 </mapper>
