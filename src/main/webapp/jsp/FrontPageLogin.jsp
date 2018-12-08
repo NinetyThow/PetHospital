@@ -53,8 +53,8 @@
         </div>
 
         <div style="width: 300px;height: 30px">
-            <div style="float: left"><a>忘记密码</a></div>
-            <div style="float: right"><a>注册</a></div>
+            <div style="float: left"><a href="forgetPassword.jsp">忘记密码</a></div>
+            <div style="float: right"><a href="userRegister.jsp">注册</a></div>
         </div>
     </form>
 

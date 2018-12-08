@@ -40,4 +40,6 @@ public interface PetHospitalBiz {
     Owners searchOwnerInfoByNameOrPhone(String LoginInfo);
 
     List<Orders> searchOrders(String orderStatus,String condition);
+
+    void replaceOrderStatus(Orders orders);
 }

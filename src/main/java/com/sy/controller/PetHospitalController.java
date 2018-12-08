@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -128,17 +130,22 @@ public class PetHospitalController {
     @RequestMapping("/removeSession")
     public String removeSession(HttpSession session) {
         session.invalidate();
-        return "FrontPage";
+        return "MainPage";
     }
 
-    @RequestMapping(value = "/getOrders", method = RequestMethod.GET)
-    public Map frontLogin(String orderStatus, String condition) {
-        System.out.println(orderStatus);
-        Map<String, Object> map = new HashMap<>();
-        map.put("code", 0);
+    @RequestMapping("/getOrders")
+    public String getOrders(String orderStatus, String condition,ModelMap map) {
+        if (orderStatus!=null){
+            orderStatus= new String(orderStatus.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        }
         List<Orders> ordersList = petHospitalBizImpl.searchOrders(orderStatus, condition);
-        map.put("data", ordersList);
-        return map;
+        map.put("ordersList",ordersList);
+        return "confirmOrder";
     }
 
+    @RequestMapping("/updateOrderStatus")
+    public String updateOrderStatus(Orders orders) {
+        petHospitalBizImpl.replaceOrderStatus(orders);
+        return "redirect:/getOrders";
+    }
 }

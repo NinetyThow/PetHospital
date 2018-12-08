@@ -12,60 +12,63 @@
     <title>Title</title>
     <meta charset="UTF-8">
     <script src="../js/jquery.js" charset="utf-8"></script>
+    <style>
+        th {
+            width: 120px;
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+            height: 40px;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="welcome.jsp" %>
 <div style="width: 600px">
-    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>订单编号</th>
+            <th>主人名称</th>
+            <th>预约时间</th>
+            <th>科室名称</th>
+            <th>预约状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="orders" items="${requestScope.ordersList}">
+            <tr>
+                <td>${orders.orderId}</td>
+                <td>${orders.owners.ownerName}</td>
+                <td>${orders.orderDate}</td>
+                <td>${orders.specialties.specialtyName}</td>
+                <td>${orders.orderStatus}</td>
+                <td>
+                    <c:if test="${orders.orderStatus eq '已审核'}">
+                        已审核
+                    </c:if>
+                    <c:if test="${orders.orderStatus eq '待审核'}">
+                        <a href="${pageContext.request.contextPath}/updateOrderStatus?orderId=${orders.orderId}" class="layui-btn">审核</a>
+                    </c:if>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <div style="height: 40px;">
+        <a href="${pageContext.request.contextPath}/getOrders?orderStatus=已审核" class="layui-btn" style="float: right">已审核订单信息</a>
+        <a href="${pageContext.request.contextPath}/getOrders?orderStatus=待审核" class="layui-btn" style="float: right;margin-right: 10px">待审核订单信息</a>
+        <a href="${pageContext.request.contextPath}/getOrders" class="layui-btn" style="float: right">全部订单信息</a>
+    </div>
 </div>
 
-<script type="text/html" id="toolbarDemo">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" id="All">获取全部数据</button>
-        <button class="layui-btn layui-btn-sm" id="isCheck">获取未审核数据</button>
-        <button class="layui-btn layui-btn-sm" id="notCheck">获取已审核数据</button>
-    </div>
-</script>
-
-<script>
-    var orderStatus;
-    $("#All").click(function () {
-        orderStatus='';
-    });
-
-    $("#isCheck").click(function () {
-        orderStatus='已审核';
-    });
-
-
-
-    layui.use('table', function () {
-        var table = layui.table;
-        $("#notCheck").click(function () {
-            orderStatus='待审核';
-        });
-        table.render({
-            elem: '#test'
-            , url: '/getOrders?orderStatus=待审核'
-            , toolbar: '#toolbarDemo'
-            , title: '用户数据表'
-            , totalRow: true
-            , cols: [[
-                {field: 'orderId', title: 'ID', width: 120, fixed: 'left', unresize: true, sort: true}
-                , {field: 'ownerName', title: '主人名称', width: 120, templet: '<div>{{d.owners.ownerName}}</div>'}
-                , {field: 'orderDate', title: '预约时间', width: 120, sort: true}
-                , {
-                    field: 'specialtyName',
-                    title: '科室名称',
-                    width: 120,
-                    sort: true,
-                    templet: '<div>{{d.specialties.specialtyName}}</div>'
-                }
-                , {field: 'orderStatus', title: '预约状态', width: 120, sort: true}
-            ]]
-            , page: true
-        });
-    });
-</script>
 </body>
 </html>

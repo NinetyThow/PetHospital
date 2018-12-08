@@ -45,4 +45,6 @@ public interface PetHospitalMapper {
     Owners findOwnerInfoByNameOrPhone(String LoginInfo);
 
     List<Orders> findOrders(Map<String, Object> map);
+
+    void updateOrderStatus(Orders orders);
 }

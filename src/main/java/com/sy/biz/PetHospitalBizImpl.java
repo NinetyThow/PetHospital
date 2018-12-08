@@ -112,4 +112,10 @@ public class PetHospitalBizImpl implements PetHospitalBiz {
         return petHospitalMapper.findOrders(map);
     }
 
+    @Transactional(readOnly = false)
+    @Override
+    public void replaceOrderStatus(Orders orders) {
+        petHospitalMapper.updateOrderStatus(orders);
+    }
+
 }

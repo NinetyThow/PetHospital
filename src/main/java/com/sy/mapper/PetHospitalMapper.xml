@@ -132,21 +132,17 @@
     <select id="findOrders" resultMap="orderInfo" parameterType="Map">
         select *
         from orders o
-        inner join owners o2 on o.ownerId = o2.ownerId
-        inner join vets v on o.vetId = v.vetId
-        inner join specialties s on o.specialtyId = s.specialtyId
+                 inner join owners o2 on o.ownerId = o2.ownerId
+                 inner join vets v on o.vetId = v.vetId
+                 inner join specialties s on o.specialtyId = s.specialtyId
         where
-        <if test="orderStatus == null">
-            o.orderStatus =#{orderStatus}
-            or o2.ownerName like '%${condition}%'
-            or v.vetName like '%${condition}%'
-        </if>
-
         <if test="orderStatus != null">
-            o2.ownerName like '%${condition}%'
-            or v.vetName like '%${condition}%'
+            o.orderStatus = #{orderStatus}
         </if>
 
+        <if test="orderStatus == null">
+            o.orderStatus = #{orderStatus} or 1=1
+        </if>
     </select>
 
     <resultMap id="orderInfo" type="Orders" autoMapping="true">
@@ -161,4 +157,20 @@
             <id property="specialtyId" column="specialtyId"/>
         </association>
     </resultMap>
+
+    <update id="updateOrderStatus" parameterType="Orders">
+        update orders o set o.orderStatus='已审核' where o.orderId=#{orderId}
+    </update>
+
+    <!--王治群写-->
+    <!--通过手机号查询主人自身所有的信息，用于修改信息-->
+    <select id="findOwnerByPhone" parameterType="String" resultType="Owners">
+        select * from owners where ownerTelephone =#{ownerTelephone}
+    </select>
+
+    <!--王治群写-->
+    <!--新增预定信息-->
+    <insert id="insertOrders" parameterType="Orders">
+        insert into orders(ownerId,orderDate,orderStatus,specialtyId,vetId) values ( #{ownerId},#{orderDate},'待审核',#{specialtyId},'1')
+    </insert>
 </mapper>
